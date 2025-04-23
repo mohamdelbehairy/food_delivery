@@ -9,8 +9,8 @@ abstract class Styles {
       fontWeight: FontWeight.normal);
 
   // medium
-  static const medium14 = TextStyle(
-      fontSize: 14,
+  static const medium12 = TextStyle(
+      fontSize: 12,
       fontFamily: "inter",
       color: Color(0xff101010),
       fontWeight: FontWeight.w500);
@@ -28,7 +28,7 @@ abstract class Styles {
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
-        static const semiBold12 = TextStyle(
+  static const semiBold12 = TextStyle(
       fontSize: 12,
       fontFamily: "inter",
       color: Colors.white,

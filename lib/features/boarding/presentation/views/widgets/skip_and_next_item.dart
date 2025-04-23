@@ -20,7 +20,7 @@ class SkipAndNextItem extends StatelessWidget {
             child: Text("Skip", style: Styles.semiBold12)),
         GestureDetector(
           onTap: () => boarding.controller.animateToPage(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 300),
               curve: Curves.easeIn,
               boarding.controller.page!.toInt() + 1),
           child: Row(

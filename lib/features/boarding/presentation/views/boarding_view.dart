@@ -10,7 +10,7 @@ class BoardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BoardingCubit()..initPageController(),
-      child: Scaffold(
+      child: const Scaffold(
         body: BoardingViewBody(),
       ),
     );

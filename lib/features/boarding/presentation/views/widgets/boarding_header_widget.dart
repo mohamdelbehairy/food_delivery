@@ -9,7 +9,7 @@ class BoardingHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final boarding = context.watch<BoardingCubit>();
+    final boarding = context.read<BoardingCubit>();
     return Column(
       children: [
         Text(

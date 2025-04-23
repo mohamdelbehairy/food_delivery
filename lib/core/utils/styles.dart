@@ -16,14 +16,20 @@ abstract class Styles {
       fontWeight: FontWeight.w500);
 
   // semiBold
-  static const semiBold32 = TextStyle(
-      fontSize: 32,
+  static const semiBold28 = TextStyle(
+      fontSize: 28,
       fontFamily: "inter",
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
   static const semiBold14 = TextStyle(
       fontSize: 14,
+      fontFamily: "inter",
+      color: Colors.white,
+      fontWeight: FontWeight.w600);
+
+        static const semiBold12 = TextStyle(
+      fontSize: 12,
       fontFamily: "inter",
       color: Colors.white,
       fontWeight: FontWeight.w600);

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  email_validator: ^3.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0

@@ -10,13 +10,13 @@ class AuthProviderListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.read<AuthBloc>();
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Row(
           spacing: 16,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: context
-              .read<AuthBloc>()
+          children: auth
               .providerList()
               .map((e) => AuthProviderItem(providerItemModel: e))
               .toList(),

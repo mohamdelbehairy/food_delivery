@@ -10,10 +10,14 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       style: Styles.medium12,
+      obscuringCharacter: "*",
       cursorColor: const Color(0xff101010),
+      validator: textFieldModel.validator,
       controller: textFieldModel.controller,
+      obscureText: textFieldModel.obscureText,
+      keyboardType: textFieldModel.keyboardType,
       decoration: InputDecoration(
           suffixIcon: textFieldModel.suffixIcon,
           border: Helper.buildBorder(),

@@ -3,13 +3,15 @@ import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.buttonName});
+  const CustomButton(
+      {super.key, required this.buttonName, required this.onTap});
   final String buttonName;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 52,
         width: double.infinity,

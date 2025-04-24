@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/widgets/custom_button.dart';
+import '../../manager/auth/auth_bloc.dart';
 import 'auth_not_or_have_account_widgt.dart';
 import 'auth_provider_section.dart';
+import 'login_button.dart';
 import 'login_forgot_password.dart';
 import 'login_header.dart';
 import 'login_text_field_section.dart';
@@ -12,6 +14,7 @@ class LoginViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.read<AuthBloc>();
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
@@ -19,21 +22,24 @@ class LoginViewBody extends StatelessWidget {
           hasScrollBody: false,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const LoginHeader(),
-                const SizedBox(height: 32),
-                const LoginTextFieldSection(),
-                const SizedBox(height: 20),
-                const LoginForgetPassword(),
-                const SizedBox(height: 64),
-                const CustomButton(buttonName: "Sign In"),
-                const SizedBox(height: 24),
-                const AuthProviderSection(),
-                const SizedBox(height: 32),
-                const AuthNotOrHaveAccountWidget(),
-              ],
+            child: Form(
+              key: auth.key,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const LoginHeader(),
+                  const SizedBox(height: 32),
+                  const LoginTextFieldSection(),
+                  const SizedBox(height: 20),
+                  const LoginForgetPassword(),
+                  const SizedBox(height: 64),
+                  const LoginButton(),
+                  const SizedBox(height: 24),
+                  const AuthProviderSection(),
+                  const SizedBox(height: 32),
+                  const AuthNotOrHaveAccountWidget(),
+                ],
+              ),
             ),
           ),
         )
@@ -41,3 +47,5 @@ class LoginViewBody extends StatelessWidget {
     );
   }
 }
+
+

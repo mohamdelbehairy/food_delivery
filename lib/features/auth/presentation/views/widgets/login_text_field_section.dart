@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/model/text_field_model.dart';
+import '../../manager/auth/auth_bloc.dart';
+import '../../manager/auth/auth_state.dart';
 import 'auth_text_field_section.dart';
 
 class LoginTextFieldSection extends StatelessWidget {
@@ -8,22 +10,17 @@ class LoginTextFieldSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AuthTextFieldSection(
-            textFieldModel: TextFieldModel(
-                header: "Email Address", hintText: "Enter Email")),
-        const SizedBox(height: 16),
-        AuthTextFieldSection(
-          textFieldModel: TextFieldModel(
-              header: "Password",
-              hintText: "Password",
-              suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.visibility_off_outlined,
-                      color: Color(0xffD6D6D6), size: 20))),
-        ),
-      ],
+    final auth = context.read<AuthBloc>();
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return Column(
+          spacing: 16,
+          children: auth
+              .loginTextFieldList()
+              .map((e) => AuthTextFieldSection(textFieldModel: e))
+              .toList(),
+        );
+      },
     );
   }
 }

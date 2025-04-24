@@ -5,7 +5,16 @@ class TextFieldModel {
   final String? header;
   final TextEditingController? controller;
   final Widget? suffixIcon;
+  final bool obscureText;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   TextFieldModel(
-      {required this.hintText, this.header, this.controller, this.suffixIcon});
+      {required this.hintText,
+      this.header,
+      this.controller,
+      this.suffixIcon,
+      this.obscureText = false,
+      this.keyboardType,
+      this.validator});
 }

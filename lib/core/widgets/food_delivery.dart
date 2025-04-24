@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/auth/presentation/manager/auth/auth_bloc.dart';
 import '../../features/boarding/presentation/views/boarding_view.dart';
 
 class FoodDelivery extends StatelessWidget {
@@ -7,9 +9,12 @@ class FoodDelivery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const BoardingView(),
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const BoardingView(),
+      ),
     );
   }
 }

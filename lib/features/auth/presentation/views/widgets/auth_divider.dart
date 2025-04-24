@@ -6,7 +6,7 @@ class AuthDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: .5,
+        height: .4,
         width: MediaQuery.sizeOf(context).width / 3.5,
         color: Color(0xff878787));
   }

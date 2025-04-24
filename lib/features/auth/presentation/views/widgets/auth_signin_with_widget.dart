@@ -3,8 +3,8 @@ import 'package:food_delivery/core/utils/styles.dart';
 
 import 'auth_divider.dart';
 
-class AuthSignInWidget extends StatelessWidget {
-  const AuthSignInWidget({super.key});
+class AuthSignInWithWidget extends StatelessWidget {
+  const AuthSignInWithWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

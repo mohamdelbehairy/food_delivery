@@ -11,7 +11,7 @@ class AuthHeaderSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 30),
+        const SizedBox(height: 32),
         Text(text1,
             style: Styles.semiBold28.copyWith(color: Color(0xff101010))),
         const SizedBox(height: 8),

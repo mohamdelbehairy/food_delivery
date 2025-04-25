@@ -89,6 +89,23 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           emit(AuthFailure(errorMessage: error.code));
         });
       }
+
+      if (event is LoginTwitterEvent) {
+        emit(AuthLoading());
+        await _authRepo.loginUsingTwitter().then((value) {
+          if (value != null) {
+            log("image: ${value.user!.photoURL}");
+            emit(LoginSuccess());
+          } else {
+            log("please try again and select twitter account");
+            emit(AuthFailure(
+                errorMessage: "please try again and select twitter account"));
+          }
+        }).catchError((error) {
+          log("error from login twitter: $error");
+          emit(AuthFailure(errorMessage: error.code));
+        });
+      }
     });
   }
 
@@ -227,9 +244,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
       ProviderItemModel(
           height: 28,
           image: Assets.imagesTwitter,
-          onTap: () {
-            log("twitter");
-          })
+          onTap: () => add(LoginTwitterEvent()))
     ];
   }
 }

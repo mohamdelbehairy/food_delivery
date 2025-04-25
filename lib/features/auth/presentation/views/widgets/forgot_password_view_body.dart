@@ -22,6 +22,7 @@ class ForgotPasswordViewBody extends StatelessWidget {
                 header: "Email Address", hintText: "Enter Email")),
         const Spacer(),
         CustomButton(buttonName: "Continue", onTap: () {}),
+        const SizedBox(height: 8),
       ],
     ));
   }

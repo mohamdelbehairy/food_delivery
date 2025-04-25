@@ -11,3 +11,5 @@ class RegisterButtonEvent extends AuthEvents {}
 class PrivacyPolicyEvent extends AuthEvents {}
 
 class LoginGoogleEvent extends AuthEvents {}
+
+class LoginTwitterEvent extends AuthEvents {}

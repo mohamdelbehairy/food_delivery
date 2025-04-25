@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.1.0
   google_sign_in: ^6.3.0
   smooth_page_indicator: ^1.2.1
+  twitter_login: ^4.4.2
 
 dev_dependencies:
   flutter_lints: ^5.0.0

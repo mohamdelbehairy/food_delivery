@@ -2,11 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
-
 		<!-- Google Sign-in Section -->
 		<key>GIDClientID</key>
 		<string>1075845010658-sv7dca5rbkmvtsfh6v5tikklslqi9597.apps.googleusercontent.com</string>
-		
+
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>
@@ -18,7 +17,21 @@
 				</array>
 			</dict>
 		</array>
-		<!-- End of the Google Sign-in Section -->
+
+		<!-- Twitter configuration -->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLName</key>
+				<string></string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>fooddelivery</string>
+				</array>
+			</dict>
+		</array>
 
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>

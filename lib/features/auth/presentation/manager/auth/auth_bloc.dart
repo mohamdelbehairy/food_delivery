@@ -7,12 +7,14 @@ import 'package:food_delivery/core/utils/assets.dart';
 
 import '../../../data/model/provider_item_model.dart';
 import '../../../data/model/text_field_model.dart';
+import '../../../data/repo/auth_repo.dart';
 import 'auth_events.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvents, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
-    on<AuthEvents>((event, emit) {
+  final AuthRepo _authRepo;
+  AuthBloc(this._authRepo) : super(AuthInitial()) {
+    on<AuthEvents>((event, emit) async {
       if (event is LoginVisbleEvent) {
         _isVisibleLogin = !_isVisibleLogin;
         emit(ChangeVisble());
@@ -26,16 +28,43 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
       if (event is LoginButtonEvent) {
         if (loginKey.currentState!.validate()) {
           loginKey.currentState!.save();
-          log("login");
+          emit(AuthLoading());
+          await _authRepo
+              .loginEmail(
+                  _loginEmailController.text, _loginPasswordController.text)
+              .then((value) {
+            emit(LoginSuccess());
+          }).catchError((error) {
+            log("error from login email: $error");
+
+            if (error.code == "invalid-credential") {
+              emit(AuthFailure(errorMessage: "invalid-credential"));
+            } else {
+              emit(AuthFailure(errorMessage: error.code));
+            }
+          });
         }
       }
 
       if (event is RegisterButtonEvent) {
-        final isValid = registerKey.currentState!.validate();
-        if (isValid) {
+        if (registerKey.currentState!.validate()) {
           registerKey.currentState!.save();
           if (privacyPolicy) {
-            log("register");
+            emit(AuthLoading());
+            await _authRepo
+                .registerEmail(_registerEmailController.text,
+                    _registerPasswordController.text)
+                .then((value) {
+              emit(RegisterSuccess());
+            }).catchError((error) {
+              log("error from register email: $error");
+
+              if (error.code == "email-already-in-use") {
+                emit(AuthFailure(errorMessage: "email-already-in-use"));
+              } else {
+                emit(AuthFailure(errorMessage: error.code));
+              }
+            });
           }
         }
       }

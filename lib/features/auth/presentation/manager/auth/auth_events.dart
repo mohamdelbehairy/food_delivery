@@ -9,3 +9,5 @@ class LoginButtonEvent extends AuthEvents {}
 class RegisterButtonEvent extends AuthEvents {}
 
 class PrivacyPolicyEvent extends AuthEvents {}
+
+class LoginGoogleEvent extends AuthEvents {}

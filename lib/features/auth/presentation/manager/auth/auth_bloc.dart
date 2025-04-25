@@ -73,6 +73,22 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
         privacyPolicy = !privacyPolicy;
         emit(ChangePrivacyPolicy());
       }
+
+      if (event is LoginGoogleEvent) {
+        emit(AuthLoading());
+        await _authRepo.loginUsingGoogle().then((value) {
+          if (value != null) {
+            emit(LoginSuccess());
+          } else {
+            log("please try again and select google account");
+            emit(AuthFailure(
+                errorMessage: "please try again and select google account"));
+          }
+        }).catchError((error) {
+          log("error from login google: $error");
+          emit(AuthFailure(errorMessage: error.code));
+        });
+      }
     });
   }
 
@@ -202,10 +218,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
   List<ProviderItemModel> providerList() {
     return [
       ProviderItemModel(
-          image: Assets.imagesGoogle,
-          onTap: () {
-            log("google");
-          }),
+          image: Assets.imagesGoogle, onTap: () => add(LoginGoogleEvent())),
       ProviderItemModel(
           image: Assets.imagesFacebook,
           onTap: () {

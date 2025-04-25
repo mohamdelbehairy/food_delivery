@@ -24,7 +24,7 @@ class AuthTextField extends StatelessWidget {
           focusedBorder: Helper.buildBorder(),
           enabledBorder: Helper.buildBorder(),
           hintText: textFieldModel.hintText,
-          hintStyle: Styles.medium12.copyWith(color: Color(0xff878787))),
+          hintStyle: Styles.medium12.copyWith(color: const Color(0xff878787))),
     );
   }
 }

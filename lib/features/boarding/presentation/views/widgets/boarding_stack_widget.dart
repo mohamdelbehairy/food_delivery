@@ -17,17 +17,17 @@ class BoardingStackWidget extends StatelessWidget {
         return Container(
           height: 400,
           width: 311,
-          margin: EdgeInsets.all(32),
-          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 24),
+          margin: const EdgeInsets.all(32),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 24),
           decoration: BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(48)),
-          child: Column(
+          child: const Column(
             children: [
               BoardingHeaderWidget(),
-              const SizedBox(height: 20),
-              const BoardingSmoothIndicator(),
-              const Spacer(),
+               SizedBox(height: 20),
+               BoardingSmoothIndicator(),
+               Spacer(),
               BoardingSkipAndNextWidget(),
             ],
           ),

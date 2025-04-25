@@ -16,7 +16,7 @@ class SkipAndNextItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-            onTap: () => Navigation.push(context, const LoginView()),
+            onTap: () => Navigation.go(context, const LoginView()),
             child: Text("Skip", style: Styles.semiBold12)),
         GestureDetector(
           onTap: () => boarding.controller.animateToPage(

@@ -15,7 +15,8 @@ class AuthHeaderSection extends StatelessWidget {
         Text(text1,
             style: Styles.semiBold28.copyWith(color: Color(0xff101010))),
         const SizedBox(height: 8),
-        Text(text2, style: Styles.medium12.copyWith(color: Color(0xff878787))),
+        Text(text2, style: Styles.medium12.copyWith(
+          color: Color(0xff878787))),
       ],
     );
   }

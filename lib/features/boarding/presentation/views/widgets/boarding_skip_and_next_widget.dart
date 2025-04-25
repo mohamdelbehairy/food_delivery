@@ -12,10 +12,10 @@ class BoardingSkipAndNextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final boarding = context.read<BoardingCubit>();
+    final boarding = context.watch<BoardingCubit>();
     return boarding.index == 2
         ? GestureDetector(
-            onTap: () => Navigation.push(context, const LoginView()),
+            onTap: () => Navigation.go(context, const LoginView()),
             child: Image.asset(Assets.imagesProgressbutton, height: 90))
         : SkipAndNextItem(boarding: boarding);
   }

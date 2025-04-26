@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:food_delivery/core/utils/helper.dart';
 import 'package:food_delivery/core/utils/secret_key.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
@@ -38,12 +41,25 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<UserCredential?> loginUsingFacebook() async {
+    final rawNonce = Helper.generateNonce();
+    final nonce = Helper.sha256ofString(rawNonce);
     UserCredential? userCredential;
-    final LoginResult loginResult = await FacebookAuth.instance.login();
+    final LoginResult loginResult =
+        await FacebookAuth.instance.login(nonce: nonce);
 
     if (loginResult.status == LoginStatus.success) {
-      final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      OAuthCredential? facebookAuthCredential;
+      if (Platform.isIOS) {
+        final token = loginResult.accessToken as LimitedToken;
+        facebookAuthCredential = OAuthCredential(
+            providerId: 'facebook.com',
+            signInMethod: 'oauth',
+            idToken: token.tokenString,
+            rawNonce: rawNonce);
+      } else {
+        facebookAuthCredential = FacebookAuthProvider.credential(
+            loginResult.accessToken!.tokenString);
+      }
 
       userCredential = await FirebaseAuth.instance
           .signInWithCredential(facebookAuthCredential);

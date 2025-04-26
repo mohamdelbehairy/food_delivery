@@ -88,7 +88,33 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           }
         }).catchError((error) {
           log("error from login google: $error");
-          emit(AuthFailure(errorMessage: error.code));
+          if (error.code == "account-exists-with-different-credential") {
+            emit(AuthFailure(
+                errorMessage: "account-exists-with-different-credential"));
+          } else {
+            emit(AuthFailure(errorMessage: error.code));
+          }
+        });
+      }
+
+      if (event is LoginFacebookEvent) {
+        emit(AuthLoading());
+        await _authRepo.loginUsingFacebook().then((value) {
+          if (value != null) {
+            emit(LoginSuccess());
+          } else {
+            log("please try again and select facebook account");
+            emit(AuthFailure(
+                errorMessage: "please try again and select facebook account"));
+          }
+        }).catchError((error) {
+          log("error from login facebook: $error");
+          if (error.code == "account-exists-with-different-credential") {
+            emit(AuthFailure(
+                errorMessage: "account-exists-with-different-credential"));
+          } else {
+            emit(AuthFailure(errorMessage: error.code));
+          }
         });
       }
 
@@ -104,24 +130,12 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           }
         }).catchError((error) {
           log("error from login twitter: $error");
-          emit(AuthFailure(errorMessage: error.code));
-        });
-      }
-
-      if (event is LoginFacebookEvent) {
-        emit(AuthLoading());
-        await _authRepo.loginUsingFacebook().then((value) {
-          if (value != null) {
-            log("image: ${value.user!.providerData}");
-            emit(LoginSuccess());
-          } else {
-            log("please try again and select facebook account");
+          if (error.code == "account-exists-with-different-credential") {
             emit(AuthFailure(
-                errorMessage: "please try again and select facebook account"));
+                errorMessage: "account-exists-with-different-credential"));
+          } else {
+            emit(AuthFailure(errorMessage: error.code));
           }
-        }).catchError((error) {
-          log("error from login facebook: $error");
-          emit(AuthFailure(errorMessage: error.code));
         });
       }
     });

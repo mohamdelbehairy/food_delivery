@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
-		<!-- Google Sign-in Section -->
+		<!-- Google Sign-in,Facebook and Twitter Section -->
 		<key>GIDClientID</key>
 		<string>1075845010658-sv7dca5rbkmvtsfh6v5tikklslqi9597.apps.googleusercontent.com</string>
 
@@ -14,23 +14,22 @@
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>com.googleusercontent.apps.1075845010658-sv7dca5rbkmvtsfh6v5tikklslqi9597</string>
+					<string>fooddelivery</string>
+					<string>fb602928682783994</string>
 				</array>
 			</dict>
 		</array>
 
-		<!-- Twitter configuration -->
-		<key>CFBundleURLTypes</key>
+		<key>FacebookAppID</key>
+		<string>602928682783994</string>
+		<key>FacebookClientToken</key>
+		<string>5cbf1b0b8d6b7faf0181565549634fea</string>
+		<key>FacebookDisplayName</key>
+		<string>Food Delivery</string>
+		<key>LSApplicationQueriesSchemes</key>
 		<array>
-			<dict>
-				<key>CFBundleTypeRole</key>
-				<string>Editor</string>
-				<key>CFBundleURLName</key>
-				<string></string>
-				<key>CFBundleURLSchemes</key>
-				<array>
-					<string>fooddelivery</string>
-				</array>
-			</dict>
+			<string>fbapi</string>
+			<string>fb-messenger-share-api</string>
 		</array>
 
 		<key>CFBundleDevelopmentRegion</key>
@@ -44,7 +43,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>food_delivery</string>
+		<string>Food Delivery</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>

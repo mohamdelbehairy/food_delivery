@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:food_delivery/core/utils/secret_key.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
@@ -36,7 +37,20 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> loginUsingFacebook() async {}
+  Future<UserCredential?> loginUsingFacebook() async {
+    UserCredential? userCredential;
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    if (loginResult.status == LoginStatus.success) {
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+
+      userCredential = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+    }
+
+    return userCredential;
+  }
 
   @override
   Future<UserCredential?> loginUsingTwitter() async {

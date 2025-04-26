@@ -15,6 +15,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
   final AuthRepo _authRepo;
   AuthBloc(this._authRepo) : super(AuthInitial()) {
     on<AuthEvents>((event, emit) async {
+      // email auth events
       if (event is LoginVisbleEvent) {
         _isVisibleLogin = !_isVisibleLogin;
         emit(ChangeVisble());
@@ -23,6 +24,11 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
       if (event is RegisterVisbleEvent) {
         _isVisibleRegister = !_isVisibleRegister;
         emit(ChangeVisble());
+      }
+
+      if (event is PrivacyPolicyEvent) {
+        privacyPolicy = !privacyPolicy;
+        emit(ChangePrivacyPolicy());
       }
 
       if (event is LoginButtonEvent) {
@@ -69,11 +75,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
         }
       }
 
-      if (event is PrivacyPolicyEvent) {
-        privacyPolicy = !privacyPolicy;
-        emit(ChangePrivacyPolicy());
-      }
-
+      // social auth events
       if (event is LoginGoogleEvent) {
         emit(AuthLoading());
         await _authRepo.loginUsingGoogle().then((value) {
@@ -94,7 +96,6 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
         emit(AuthLoading());
         await _authRepo.loginUsingTwitter().then((value) {
           if (value != null) {
-            log("image: ${value.user!.photoURL}");
             emit(LoginSuccess());
           } else {
             log("please try again and select twitter account");
@@ -103,6 +104,23 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           }
         }).catchError((error) {
           log("error from login twitter: $error");
+          emit(AuthFailure(errorMessage: error.code));
+        });
+      }
+
+      if (event is LoginFacebookEvent) {
+        emit(AuthLoading());
+        await _authRepo.loginUsingFacebook().then((value) {
+          if (value != null) {
+            log("image: ${value.user!.providerData}");
+            emit(LoginSuccess());
+          } else {
+            log("please try again and select facebook account");
+            emit(AuthFailure(
+                errorMessage: "please try again and select facebook account"));
+          }
+        }).catchError((error) {
+          log("error from login facebook: $error");
           emit(AuthFailure(errorMessage: error.code));
         });
       }
@@ -237,10 +255,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
       ProviderItemModel(
           image: Assets.imagesGoogle, onTap: () => add(LoginGoogleEvent())),
       ProviderItemModel(
-          image: Assets.imagesFacebook,
-          onTap: () {
-            log("facebook");
-          }),
+          image: Assets.imagesFacebook, onTap: () => add(LoginFacebookEvent())),
       ProviderItemModel(
           height: 28,
           image: Assets.imagesTwitter,

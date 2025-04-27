@@ -23,6 +23,9 @@ class LoginViewBody extends StatelessWidget {
         if (state is AuthFailure) {
           Helper.loginBlocConsumer(context, errorMessage: state.errorMessage);
         }
+        if (state is LoginSuccess) {
+          auth.loginDispose(context,isLogin: true);
+        }
       },
       builder: (context, state) {
         return AuthCustomScrollView(

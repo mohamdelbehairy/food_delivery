@@ -22,6 +22,10 @@ class Assets {
   /// assets/images/google.svg
   static const String imagesGoogle = "assets/images/google.svg";
 
+  /// Assets for imagesLoginSuccess
+  /// assets/images/login_success.svg
+  static const String imagesLoginSuccess = "assets/images/login_success.svg";
+
   /// Assets for imagesProgressbutton
   /// assets/images/Progressbutton.png
   static const String imagesProgressbutton = "assets/images/Progressbutton.png";

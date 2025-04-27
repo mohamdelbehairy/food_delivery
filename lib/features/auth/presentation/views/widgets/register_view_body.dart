@@ -24,6 +24,9 @@ class RegisterViewBody extends StatelessWidget {
           Helper.registerBlocConsumer(context,
               errorMessage: state.errorMessage);
         }
+        if (state is LoginSuccess) {
+          auth.loginDispose(context);
+        }
       },
       builder: (context, state) {
         return AuthCustomScrollView(

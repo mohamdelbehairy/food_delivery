@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/core/utils/colors.dart';
 
 abstract class Styles {
   // reqular
@@ -39,4 +40,17 @@ abstract class Styles {
       fontFamily: "inter",
       color: Colors.white,
       fontWeight: FontWeight.w600);
+
+  // urbainst font
+  static TextStyle styleBoldUrbainst24 = TextStyle(
+      fontSize: 24,
+      fontFamily: 'Urbanist',
+      fontWeight: FontWeight.bold,
+      color: AppColors.primaryColor);
+
+  static TextStyle styleMediumUrbainst16 = TextStyle(
+      fontFamily: 'Urbanist',
+      fontWeight: FontWeight.w500,
+      color: const Color(0xff59606E),
+      fontSize: 16);
 }

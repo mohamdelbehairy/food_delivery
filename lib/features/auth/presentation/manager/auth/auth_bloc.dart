@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 
+import '../../../../../core/utils/show_alert_widget.dart';
 import '../../../data/model/provider_item_model.dart';
 import '../../../data/model/text_field_model.dart';
 import '../../../data/repo/auth_repo.dart';
@@ -307,5 +308,24 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           image: Assets.imagesTwitter,
           onTap: () => add(LoginTwitterEvent()))
     ];
+  }
+
+  void loginDispose(BuildContext context, {bool? isLogin}) {
+    showAlertWidget(context);
+    if (isLogin == true) {
+      _loginEmailController.clear();
+      _loginPasswordController.clear();
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _loginEmailController.dispose();
+    _loginPasswordController.dispose();
+    _registerEmailController.dispose();
+    _registerUserNameController.dispose();
+    _registerPasswordController.dispose();
+    forgotPasswordController.dispose();
+    return super.close();
   }
 }

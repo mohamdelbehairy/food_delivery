@@ -89,4 +89,9 @@ class AuthRepoImpl extends AuthRepo {
 
     return userCredential;
   }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 }

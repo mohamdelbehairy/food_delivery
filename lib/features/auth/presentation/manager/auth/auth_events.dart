@@ -15,3 +15,5 @@ class LoginGoogleEvent extends AuthEvents {}
 class LoginFacebookEvent extends AuthEvents {}
 
 class LoginTwitterEvent extends AuthEvents {}
+
+class ForgotPasswordEvent extends AuthEvents {}

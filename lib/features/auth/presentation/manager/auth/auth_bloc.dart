@@ -146,6 +146,25 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           }
         });
       }
+
+      // forgot password events
+      if (event is ForgotPasswordEvent) {
+        if (forgotPasswordKey.currentState!.validate()) {
+          forgotPasswordKey.currentState!.save();
+          isLoading = true;
+          emit(AuthLoading());
+          await _authRepo
+              .forgotPassword(forgotPasswordController.text)
+              .then((value) {
+            isLoading = false;
+            emit(ForgotPasswordSuccess());
+          }).catchError((error) {
+            log("error from forgot password: $error");
+            isLoading = false;
+            emit(AuthFailure(errorMessage: error.code));
+          });
+        }
+      }
     });
   }
 
@@ -156,6 +175,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
 
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> forgotPasswordKey = GlobalKey<FormState>();
 
   final TextEditingController _loginEmailController = TextEditingController();
   final TextEditingController _loginPasswordController =
@@ -166,6 +186,9 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
   final TextEditingController _registerUserNameController =
       TextEditingController();
   final TextEditingController _registerPasswordController =
+      TextEditingController();
+
+  final TextEditingController forgotPasswordController =
       TextEditingController();
 
   List<TextFieldModel> loginTextFieldList() {

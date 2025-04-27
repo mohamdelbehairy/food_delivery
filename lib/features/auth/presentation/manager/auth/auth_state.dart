@@ -17,3 +17,5 @@ final class AuthFailure extends AuthState {
 
   AuthFailure({required this.errorMessage});
 }
+
+final class ForgotPasswordSuccess extends AuthState {}

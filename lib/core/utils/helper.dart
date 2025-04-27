@@ -68,4 +68,9 @@ abstract class Helper {
           message: "Oops! Something went wrong. Please try again later.");
     }
   }
+
+  static void forgotPasswordBlocConsumer(BuildContext context) {
+    Helper.customSnackBar(context,
+        message: "Check your email to reset your password for Food Delivery.");
+  }
 }

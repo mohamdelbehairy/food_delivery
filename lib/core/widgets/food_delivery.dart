@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/auth/presentation/manager/auth/auth_bloc.dart';
-import '../../features/boarding/presentation/views/boarding_view.dart';
+import '../utils/material_app_home.dart';
 
 class FoodDelivery extends StatelessWidget {
   const FoodDelivery({super.key});
@@ -14,7 +14,7 @@ class FoodDelivery extends StatelessWidget {
       create: (context) => AuthBloc(AuthRepoImpl()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const BoardingView(),
+        home: materialAppHome(),
       ),
     );
   }

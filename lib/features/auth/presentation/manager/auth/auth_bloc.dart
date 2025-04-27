@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
+import 'package:food_delivery/core/utils/constants.dart';
+import 'package:food_delivery/core/utils/helper.dart';
 
-import '../../../../../core/utils/show_alert_widget.dart';
+import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../data/model/provider_item_model.dart';
 import '../../../data/model/text_field_model.dart';
 import '../../../data/repo/auth_repo.dart';
@@ -310,8 +313,18 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
     ];
   }
 
-  void loginDispose(BuildContext context, {bool? isLogin}) {
-    showAlertWidget(context);
+  final SharedPrefService _sharedPrefService = SharedPrefService();
+  void loginDispose(BuildContext context, {bool? isLogin}) async {
+    Helper.showAlertWidget(context);
+
+    final isFirstTime =
+        _sharedPrefService.getString(key: Constants.isFirstTime);
+    if (isFirstTime == null || isFirstTime.isEmpty) {
+      await _sharedPrefService.setString(
+          key: Constants.isFirstTime, value: "true");
+    }
+    await _sharedPrefService.setString(
+        key: Constants.userID, value: FirebaseAuth.instance.currentUser!.uid);
     if (isLogin == true) {
       _loginEmailController.clear();
       _loginPasswordController.clear();

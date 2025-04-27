@@ -6,6 +6,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../widgets/food_delivery.dart';
 import 'bloc_observer.dart';
+import 'services/shared_pref_service.dart';
 
 Future<void> initMaint() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ Future<void> initMaint() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SharedPrefService.init();
 
   runApp(const FoodDelivery());
 }

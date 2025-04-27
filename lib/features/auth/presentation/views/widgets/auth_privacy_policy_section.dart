@@ -13,7 +13,7 @@ class AuthPrivacyPolicySection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const PrivacyPolicyBox(),
+          PrivacyPolicyBox(),
           const SizedBox(width: 8),
           const PrivacyPolicyText(),
         ],
@@ -21,5 +21,3 @@ class AuthPrivacyPolicySection extends StatelessWidget {
     );
   }
 }
-
-

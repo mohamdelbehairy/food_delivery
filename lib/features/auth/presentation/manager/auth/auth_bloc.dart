@@ -34,18 +34,22 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
       if (event is LoginButtonEvent) {
         if (loginKey.currentState!.validate()) {
           loginKey.currentState!.save();
+          isLoading = true;
           emit(AuthLoading());
           await _authRepo
               .loginEmail(
                   _loginEmailController.text, _loginPasswordController.text)
               .then((value) {
+            isLoading = false;
             emit(LoginSuccess());
           }).catchError((error) {
             log("error from login email: $error");
 
             if (error.code == "invalid-credential") {
+              isLoading = false;
               emit(AuthFailure(errorMessage: "invalid-credential"));
             } else {
+              isLoading = false;
               emit(AuthFailure(errorMessage: error.code));
             }
           });
@@ -56,18 +60,22 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
         if (registerKey.currentState!.validate()) {
           registerKey.currentState!.save();
           if (privacyPolicy) {
+            isLoading = true;
             emit(AuthLoading());
             await _authRepo
                 .registerEmail(_registerEmailController.text,
                     _registerPasswordController.text)
                 .then((value) {
+              isLoading = false;
               emit(RegisterSuccess());
             }).catchError((error) {
               log("error from register email: $error");
 
               if (error.code == "email-already-in-use") {
+                isLoading = false;
                 emit(AuthFailure(errorMessage: "email-already-in-use"));
               } else {
+                isLoading = false;
                 emit(AuthFailure(errorMessage: error.code));
               }
             });
@@ -144,6 +152,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
   bool _isVisibleLogin = false;
   bool _isVisibleRegister = false;
   bool privacyPolicy = false;
+  bool isLoading = false;
 
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();

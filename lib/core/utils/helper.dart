@@ -35,4 +35,37 @@ abstract class Helper {
     final digest = sha256.convert(bytes);
     return digest.toString();
   }
+
+  static void customSnackBar(BuildContext context, {required String message}) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  static void registerBlocConsumer(BuildContext context,
+      {required String errorMessage}) {
+    if (errorMessage == "email-already-in-use" ||
+        errorMessage == "account-exists-with-different-credential") {
+      Helper.customSnackBar(context,
+          message: "The email address is already in use by another account.");
+    } else {
+      Helper.customSnackBar(context,
+          message: "Oops! Something went wrong. Please try again later.");
+    }
+  }
+
+  static void loginBlocConsumer(BuildContext context,
+      {required String errorMessage}) {
+    if (errorMessage == "email-already-in-use" ||
+        errorMessage == "account-exists-with-different-credential") {
+      Helper.customSnackBar(context,
+          message: "The email address is already in use by another account.");
+    }
+    if (errorMessage == "invalid-credential") {
+      Helper.customSnackBar(context,
+          message: "The email address or password is incorrect.");
+    } else {
+      Helper.customSnackBar(context,
+          message: "Oops! Something went wrong. Please try again later.");
+    }
+  }
 }

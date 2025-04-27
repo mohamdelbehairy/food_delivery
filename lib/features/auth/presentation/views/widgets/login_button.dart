@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/model/button_model.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 import '../../manager/auth/auth_bloc.dart';
@@ -12,6 +13,10 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.read<AuthBloc>();
     return CustomButton(
-        buttonName: "Sign In", onTap: () => auth.add(LoginButtonEvent()));
+      buttonModel: ButtonModel(
+          buttonName: "Sign In",
+          isLoading: auth.isLoading,
+          onTap: () => auth.add(LoginButtonEvent())),
+    );
   }
 }

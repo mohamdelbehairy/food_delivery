@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/core/model/button_model.dart';
 import 'package:food_delivery/core/widgets/custom_button.dart';
 import 'package:food_delivery/features/auth/data/model/text_field_model.dart';
 import 'package:food_delivery/features/auth/presentation/views/widgets/auth_text_field_section.dart';
@@ -21,7 +22,8 @@ class ForgotPasswordViewBody extends StatelessWidget {
             textFieldModel: TextFieldModel(
                 header: "Email Address", hintText: "Enter Email")),
         const Spacer(),
-        CustomButton(buttonName: "Continue", onTap: () {}),
+        CustomButton(
+            buttonModel: ButtonModel(buttonName: "Continue", onTap: () {})),
         const SizedBox(height: 8),
       ],
     ));

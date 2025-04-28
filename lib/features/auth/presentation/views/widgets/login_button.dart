@@ -4,7 +4,7 @@ import 'package:food_delivery/core/model/button_model.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 import '../../manager/auth/auth_bloc.dart';
-import '../../manager/auth/auth_events.dart';
+import '../../manager/auth/auth_event.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});

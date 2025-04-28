@@ -14,6 +14,14 @@ class Assets {
   /// assets/images/boarding3.png
   static const String imagesBoarding3 = "assets/images/boarding3.png";
 
+  /// Assets for imagesCard
+  /// assets/images/card.svg
+  static const String imagesCard = "assets/images/card.svg";
+
+  /// Assets for imagesChat
+  /// assets/images/chat.svg
+  static const String imagesChat = "assets/images/chat.svg";
+
   /// Assets for imagesFacebook
   /// assets/images/facebook.svg
   static const String imagesFacebook = "assets/images/facebook.svg";
@@ -22,9 +30,17 @@ class Assets {
   /// assets/images/google.svg
   static const String imagesGoogle = "assets/images/google.svg";
 
+  /// Assets for imagesHome
+  /// assets/images/home.svg
+  static const String imagesHome = "assets/images/home.svg";
+
   /// Assets for imagesLoginSuccess
   /// assets/images/login_success.svg
   static const String imagesLoginSuccess = "assets/images/login_success.svg";
+
+  /// Assets for imagesProfile
+  /// assets/images/profile.svg
+  static const String imagesProfile = "assets/images/profile.svg";
 
   /// Assets for imagesProgressbutton
   /// assets/images/Progressbutton.png

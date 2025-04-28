@@ -12,13 +12,13 @@ import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../data/model/provider_item_model.dart';
 import '../../../data/model/text_field_model.dart';
 import '../../../data/repo/auth_repo.dart';
-import 'auth_events.dart';
+import 'auth_event.dart';
 import 'auth_state.dart';
 
-class AuthBloc extends Bloc<AuthEvents, AuthState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _authRepo;
   AuthBloc(this._authRepo) : super(AuthInitial()) {
-    on<AuthEvents>((event, emit) async {
+    on<AuthEvent>((event, emit) async {
       // email auth events
       if (event is LoginVisbleEvent) {
         _isVisibleLogin = !_isVisibleLogin;

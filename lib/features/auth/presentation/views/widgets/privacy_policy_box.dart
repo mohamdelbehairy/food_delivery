@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 
 import '../../manager/auth/auth_bloc.dart';
-import '../../manager/auth/auth_events.dart';
+import '../../manager/auth/auth_event.dart';
 
 class PrivacyPolicyBox extends StatelessWidget {
   const PrivacyPolicyBox({super.key});

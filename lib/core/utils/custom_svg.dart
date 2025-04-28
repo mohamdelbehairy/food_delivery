@@ -9,6 +9,9 @@ class CustomSvg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(svgModel.image,
-        height: svgModel.height, width: svgModel.width);
+        height: svgModel.height,
+        width: svgModel.width,
+        // ignore: deprecated_member_use
+        color: svgModel.color);
   }
 }

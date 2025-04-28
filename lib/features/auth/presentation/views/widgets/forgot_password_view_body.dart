@@ -5,7 +5,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 import 'package:food_delivery/core/widgets/custom_button.dart';
 
 import '../../manager/auth/auth_bloc.dart';
-import '../../manager/auth/auth_events.dart';
+import '../../manager/auth/auth_event.dart';
 import '../../manager/auth/auth_state.dart';
 import 'auth_custom_scroll_view.dart';
 import 'forgot_password_header.dart';

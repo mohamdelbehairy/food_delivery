@@ -4,7 +4,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../manager/auth/auth_bloc.dart';
 import '../../manager/auth/auth_state.dart';
-import 'auth_custom_scroll_view.dart';
+import '../../../../../core/widgets/custom_scroll_view_widget.dart';
 import 'auth_privacy_policy_section.dart';
 import 'auth_provider_section.dart';
 import 'register_button.dart';
@@ -29,7 +29,7 @@ class RegisterViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return AuthCustomScrollView(
+        return CustomScrollViewWidget(
           formKey: auth.registerKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

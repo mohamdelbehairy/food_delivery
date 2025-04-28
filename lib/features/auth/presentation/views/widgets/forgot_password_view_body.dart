@@ -7,7 +7,7 @@ import 'package:food_delivery/core/widgets/custom_button.dart';
 import '../../manager/auth/auth_bloc.dart';
 import '../../manager/auth/auth_event.dart';
 import '../../manager/auth/auth_state.dart';
-import 'auth_custom_scroll_view.dart';
+import '../../../../../core/widgets/custom_scroll_view_widget.dart';
 import 'forgot_password_header.dart';
 import 'forgot_password_text_field.dart';
 
@@ -24,7 +24,7 @@ class ForgotPasswordViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return AuthCustomScrollView(
+        return CustomScrollViewWidget(
             formKey: auth.forgotPasswordKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -19,13 +19,9 @@ class ProfileItem extends StatelessWidget {
         height: 28,
         width: 28,
         decoration: BoxDecoration(
-          color: Color(0xffF5F5FF),
-          borderRadius: BorderRadius.circular(8),
-        ),
+            color: Color(0xffF5F5FF), borderRadius: BorderRadius.circular(8)),
         child: Center(
-          child: CustomSvg(
-            svgModel: SvgModel(image: profileItemModel.leading),
-          ),
+          child: CustomSvg(svgModel: SvgModel(image: profileItemModel.leading)),
         ),
       ),
       title: Text(profileItemModel.title, style: Styles.medium14),

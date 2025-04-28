@@ -11,6 +11,8 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: buttonModel.onTap,
       child: Container(
         height: 52,

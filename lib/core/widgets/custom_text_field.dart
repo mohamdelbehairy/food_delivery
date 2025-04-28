@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 
-import '../../../data/model/text_field_model.dart';
+import '../model/text_field_model.dart';
 
-class AuthTextField extends StatelessWidget {
-  const AuthTextField({super.key, required this.textFieldModel});
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({super.key, required this.textFieldModel});
   final TextFieldModel textFieldModel;
 
   @override

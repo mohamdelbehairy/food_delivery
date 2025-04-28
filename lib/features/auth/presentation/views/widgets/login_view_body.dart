@@ -4,7 +4,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../manager/auth/auth_bloc.dart';
 import '../../manager/auth/auth_state.dart';
-import 'auth_custom_scroll_view.dart';
+import '../../../../../core/widgets/custom_scroll_view_widget.dart';
 import 'auth_provider_section.dart';
 import 'login_button.dart';
 import 'login_forgot_password.dart';
@@ -24,11 +24,11 @@ class LoginViewBody extends StatelessWidget {
           Helper.loginBlocConsumer(context, errorMessage: state.errorMessage);
         }
         if (state is LoginSuccess) {
-          auth.loginDispose(context,isLogin: true);
+          auth.loginDispose(context, isLogin: true);
         }
       },
       builder: (context, state) {
-        return AuthCustomScrollView(
+        return CustomScrollViewWidget(
           formKey: auth.loginKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

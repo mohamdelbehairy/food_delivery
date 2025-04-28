@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AuthCustomScrollView extends StatelessWidget {
-  const AuthCustomScrollView({super.key, required this.child, this.formKey});
+class CustomScrollViewWidget extends StatelessWidget {
+  const CustomScrollViewWidget({super.key, required this.child, this.formKey});
   final Widget child;
   final Key? formKey;
 

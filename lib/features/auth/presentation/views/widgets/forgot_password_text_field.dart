@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/model/text_field_model.dart';
+import '../../../../../core/model/text_field_model.dart';
 import '../../manager/auth/auth_bloc.dart';
 import 'auth_text_field_section.dart';
 

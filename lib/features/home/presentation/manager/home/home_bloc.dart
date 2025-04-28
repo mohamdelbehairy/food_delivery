@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 
 import '../../../data/model/bottom_nav_model.dart';
-import '../../views/profile_view.dart';
+import '../../../../profile/presentation/views/profile_view.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

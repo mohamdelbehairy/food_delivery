@@ -10,7 +10,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../data/model/provider_item_model.dart';
-import '../../../data/model/text_field_model.dart';
+import '../../../../../core/model/text_field_model.dart';
 import '../../../data/repo/auth_repo.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';

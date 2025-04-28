@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/utils/colors.dart';
 
 import '../../../../../core/model/button_model.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -16,6 +17,7 @@ class RegisterButton extends StatelessWidget {
         buttonModel: ButtonModel(
             buttonName: "Register",
             isLoading: auth.isLoading,
+            color: AppColors.primaryColor,
             onTap: () => auth.add(RegisterButtonEvent())));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 
 import '../../../data/model/bottom_nav_model.dart';
+import '../../views/profile_view.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -26,10 +27,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     BottomNavModel(image: Assets.imagesProfile, index: 3, lable: "Profile"),
   ];
 
-  List<Widget> views = [
+  List<Widget> views =const [
     Scaffold(),
     Scaffold(),
     Scaffold(),
-    Scaffold(),
+    ProfileView(),
   ];
 }

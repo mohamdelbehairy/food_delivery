@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/button_model.dart';
+import 'package:food_delivery/core/utils/colors.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 import '../../manager/auth/auth_bloc.dart';
@@ -16,6 +17,7 @@ class LoginButton extends StatelessWidget {
       buttonModel: ButtonModel(
           buttonName: "Sign In",
           isLoading: auth.isLoading,
+          color: AppColors.primaryColor,
           onTap: () => auth.add(LoginButtonEvent())),
     );
   }

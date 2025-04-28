@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1075845010658",
+    "project_id": "food-dash-52b17",
+    "storage_bucket": "food-dash-52b17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075845010658:android:311e0ad34e8b1ba030fabb",
+        "android_client_info": {
+          "package_name": "com.foodDelivery.eg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075845010658-l5ghh99lgr3siqnv7oho91vehb5qussj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcU_FVjgCIOj2hQ0Q7etQFjiVwFMhBja4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075845010658-l5ghh99lgr3siqnv7oho91vehb5qussj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1075845010658-h8utbro3jov3bcbhef8hptt8jucin2cp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodDash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

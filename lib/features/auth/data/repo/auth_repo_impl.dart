@@ -94,4 +94,10 @@ class AuthRepoImpl extends AuthRepo {
   Future<void> forgotPassword(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
+
+  @override
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+  }
 }

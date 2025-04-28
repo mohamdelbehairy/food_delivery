@@ -9,5 +9,7 @@ class SharedPrefService {
   Future<void> setString({required String key, required String value}) async =>
       _prefs?.setString(key, value);
 
-  String? getString({required String key}) => _prefs?.getString(key);
+  String? getString(String key) => _prefs?.getString(key);
+
+  Future<void> remove(String key) async => await _prefs?.remove(key);
 }

@@ -7,4 +7,5 @@ abstract class AuthRepo {
   Future<UserCredential?> loginUsingFacebook();
   Future<UserCredential?> loginUsingTwitter();
   Future<void> forgotPassword(String email);
+  Future<void> logOut();
 }

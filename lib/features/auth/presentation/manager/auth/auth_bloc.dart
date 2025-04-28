@@ -169,6 +169,18 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
           });
         }
       }
+
+      // logout events
+      if (event is LogoutEvent) {
+        emit(AuthLoading());
+        await _authRepo.logOut().then((value) async {
+          await _sharedPrefService.remove(Constants.userID);
+          emit(LogoutSuccess());
+        }).catchError((error) {
+          log("error from logout: $error");
+          emit(AuthFailure(errorMessage: error.code));
+        });
+      }
     });
   }
 
@@ -317,8 +329,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthState> {
   void loginDispose(BuildContext context, {bool? isLogin}) async {
     Helper.showAlertWidget(context);
 
-    final isFirstTime =
-        _sharedPrefService.getString(key: Constants.isFirstTime);
+    final isFirstTime = _sharedPrefService.getString(Constants.isFirstTime);
     if (isFirstTime == null || isFirstTime.isEmpty) {
       await _sharedPrefService.setString(
           key: Constants.isFirstTime, value: "true");

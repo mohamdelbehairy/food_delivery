@@ -9,11 +9,11 @@ import 'services/shared_pref_service.dart';
 
 Widget materialAppHome() {
   final SharedPrefService sharedPrefService = SharedPrefService();
-  final isFirstTime = sharedPrefService.getString(key: Constants.isFirstTime);
-  final userID = sharedPrefService.getString(key: Constants.userID);
+  final isFirstTime = sharedPrefService.getString(Constants.isFirstTime);
+  final userID = sharedPrefService.getString(Constants.userID);
 
   if (isFirstTime != null && isFirstTime.isNotEmpty) {
-    if (userID == FirebaseAuth.instance.currentUser!.uid) {
+    if (userID != null && userID == FirebaseAuth.instance.currentUser?.uid) {
       return const HomeView();
     }
     return const LoginView();

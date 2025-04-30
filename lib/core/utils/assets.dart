@@ -34,6 +34,10 @@ class Assets {
   /// assets/images/delete_account.svg
   static const String imagesDeleteAccount = "assets/images/delete_account.svg";
 
+  /// Assets for imagesDone
+  /// assets/images/done.svg
+  static const String imagesDone = "assets/images/done.svg";
+
   /// Assets for imagesExtraCard
   /// assets/images/extra_card.svg
   static const String imagesExtraCard = "assets/images/extra_card.svg";

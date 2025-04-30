@@ -14,7 +14,8 @@ class PersonalDataListView extends StatelessWidget {
       builder: (context, state) {
         return Column(
           spacing: 16,
-          children: personalData.textFieldList
+          children: personalData
+              .textFieldList(context)
               .map((e) => CustomTextFieldSection(textFieldModel: e))
               .toList(),
         );

@@ -8,6 +8,7 @@ class TextFieldModel {
   final bool obscureText;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+  final bool readOnly;
 
   TextFieldModel(
       {required this.hintText,
@@ -16,5 +17,6 @@ class TextFieldModel {
       this.suffixIcon,
       this.obscureText = false,
       this.keyboardType,
-      this.validator});
+      this.validator,
+      this.readOnly = false});
 }

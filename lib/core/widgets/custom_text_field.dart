@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
       style: Styles.medium12,
       obscuringCharacter: "*",
       cursorColor: const Color(0xff101010),
+      readOnly: textFieldModel.readOnly,
       validator: textFieldModel.validator,
       controller: textFieldModel.controller,
       obscureText: textFieldModel.obscureText,

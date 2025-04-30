@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/model/text_field_model.dart';
 import '../../manager/auth/auth_bloc.dart';
-import 'auth_text_field_section.dart';
+import '../../../../../core/widgets/custom_text_field_section.dart';
 
 class ForgotPasswordTextField extends StatelessWidget {
   const ForgotPasswordTextField({super.key});
@@ -12,7 +12,7 @@ class ForgotPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.read<AuthBloc>();
-    return AuthTextFieldSection(
+    return CustomTextFieldSection(
         textFieldModel: TextFieldModel(
             header: "Email Address",
             hintText: "Enter Email",

@@ -14,6 +14,7 @@ class ProfileViewBody extends StatelessWidget {
     return CustomScrollViewWidget(
         child: Column(
       children: [
+        const SizedBox(height: 24),
         const ProfileUserData(),
         const SizedBox(height: 12),
         const ProfileDivider(),

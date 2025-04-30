@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/styles.dart';
+
+import 'profile_image_widget.dart';
 
 class ProfileUserData extends StatelessWidget {
   const ProfileUserData({super.key});
@@ -9,10 +10,7 @@ class ProfileUserData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 8),
-        Text("Profile Settings", style: Styles.semiBold16),
-        const SizedBox(height: 40),
-        CircleAvatar(radius: 50, child: Image.asset(Assets.imagesRectangle)),
+        const ProfileImageWidget(),
         const SizedBox(height: 20),
         Text("Albert Stevano Bajefski", style: Styles.semiBold16),
         const SizedBox(height: 4),
@@ -22,3 +20,4 @@ class ProfileUserData extends StatelessWidget {
     );
   }
 }
+

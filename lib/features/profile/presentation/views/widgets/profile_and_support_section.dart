@@ -14,7 +14,7 @@ class ProfileAndSupportSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         PofileTitleAndListViewSection(
-            title: "Profile", items: profile.profileItems()),
+            title: "Profile", items: profile.profileItems(context)),
         const SizedBox(height: 16),
         PofileTitleAndListViewSection(
             title: "Support", items: profile.supportItems()),

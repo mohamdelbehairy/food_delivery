@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,14 +11,12 @@ class PersonalDataButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final personalData = context.read<PersonalDataBloc>();
     return CustomButton(
         buttonModel: ButtonModel(
       buttonName: "Save",
       color: AppColors.primaryColor,
-      onTap: () {
-        final image = context.read<PersonalDataBloc>();
-        log("${image.image}");
-      },
+      onTap: () => personalData.add(SavePersonalDataEvent()),
     ));
   }
 }

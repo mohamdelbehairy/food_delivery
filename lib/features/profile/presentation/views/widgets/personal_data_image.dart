@@ -10,13 +10,9 @@ class PersonalDataImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = context.read<PersonalDataBloc>();
-    return BlocBuilder<PersonalDataBloc, PersonalDataState>(
-      builder: (context, state) {
-        return ProfileImageWidget(
-            child: image.image == null
-                ? null
-                : Image.file(image.image!,fit: BoxFit.fill));
-      },
-    );
+    return ProfileImageWidget(
+        child: image.image == null
+            ? null
+            : Image.file(image.image!,fit: BoxFit.fill));
   }
 }

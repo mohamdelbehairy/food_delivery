@@ -11,7 +11,7 @@ class PersonalDataImageWidget extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional(1.1, 1),
       children: [
-        const PersonalDataImage(),
+        PersonalDataImage(),
         const PickImageWidget(),
       ],
     );

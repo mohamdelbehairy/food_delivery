@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/helper.dart';
+import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../manager/auth/auth_bloc.dart';
 import '../../manager/auth/auth_state.dart';
 import '../../../../../core/widgets/custom_scroll_view_widget.dart';
+import '../login_view.dart';
 import 'auth_privacy_policy_section.dart';
 import 'auth_provider_section.dart';
 import 'register_button.dart';
@@ -23,6 +25,9 @@ class RegisterViewBody extends StatelessWidget {
         if (state is AuthFailure) {
           Helper.registerBlocConsumer(context,
               errorMessage: state.errorMessage);
+        }
+        if (state is RegisterSuccess) {
+          Navigation.go(context, const LoginView());
         }
         if (state is LoginSuccess) {
           auth.loginDispose(context);

@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';
+import 'package:food_delivery/features/profile/data/model/user_data_model.dart';
+import 'package:food_delivery/features/profile/data/repo/profile_repo.dart';
 
 import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../data/model/provider_item_model.dart';
@@ -17,7 +19,8 @@ import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _authRepo;
-  AuthBloc(this._authRepo) : super(AuthInitial()) {
+  final ProfileRepo _profileRepo;
+  AuthBloc(this._authRepo, this._profileRepo) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
       if (event is LoginVisbleEvent) {
@@ -69,7 +72,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await _authRepo
                 .registerEmail(_registerEmailController.text,
                     _registerPasswordController.text)
-                .then((value) {
+                .then((value) async {
+              await _profileRepo.addUserData(UserDataModel(
+                  userName: _registerUserNameController.text,
+                  userID: FirebaseAuth.instance.currentUser!.uid,
+                  userEmail: _registerEmailController.text));
               isLoading = false;
               emit(RegisterSuccess());
             }).catchError((error) {
@@ -90,8 +97,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // social auth events
       if (event is LoginGoogleEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingGoogle().then((value) {
+        await _authRepo.loginUsingGoogle().then((value) async {
           if (value != null) {
+            if (!await _profileRepo.isUserExist(value.user!.uid)) {
+              await _profileRepo.addUserData(UserDataModel(
+                  userName: value.user?.displayName ?? "",
+                  userID: value.user?.uid ?? "",
+                  userEmail: value.user?.email ?? "",
+                  userImage: value.user?.photoURL ?? ""));
+            }
             emit(LoginSuccess());
           } else {
             log("please try again and select google account");
@@ -111,8 +125,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is LoginFacebookEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingFacebook().then((value) {
+        await _authRepo.loginUsingFacebook().then((value) async {
           if (value != null) {
+            if (!await _profileRepo.isUserExist(value.user!.uid)) {
+              await _profileRepo.addUserData(UserDataModel(
+                  userName: value.user?.displayName ?? "",
+                  userID: value.user?.uid ?? "",
+                  userEmail: value.user?.email ?? "",
+                  userImage: value.user?.photoURL ?? ""));
+            }
+
             emit(LoginSuccess());
           } else {
             log("please try again and select facebook account");
@@ -132,8 +154,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is LoginTwitterEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingTwitter().then((value) {
+        await _authRepo.loginUsingTwitter().then((value) async {
           if (value != null) {
+            if (!await _profileRepo.isUserExist(value.user!.uid)) {
+              await _profileRepo.addUserData(UserDataModel(
+                  userName: value.user?.displayName ?? "",
+                  userID: value.user?.uid ?? "",
+                  userEmail: value.user?.email ?? "",
+                  userImage: value.user?.photoURL ?? ""));
+            }
             emit(LoginSuccess());
           } else {
             log("please try again and select twitter account");

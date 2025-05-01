@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/model/button_model.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../manager/personal_data/personal_data_bloc.dart';
 
 class PersonalDataButton extends StatelessWidget {
   const PersonalDataButton({super.key});
@@ -11,6 +15,12 @@ class PersonalDataButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomButton(
         buttonModel: ButtonModel(
-            buttonName: "Save", color: AppColors.primaryColor, onTap: () {}));
+      buttonName: "Save",
+      color: AppColors.primaryColor,
+      onTap: () {
+        final image = context.read<PersonalDataBloc>();
+        log("${image.image}");
+      },
+    ));
   }
 }

@@ -1,17 +1,28 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/text_field_model.dart';
 
+import '../../../data/repo/profile_repo.dart';
 import '../../views/widgets/gender_bottom_sheet.dart';
 
 part 'personal_data_event.dart';
 part 'personal_data_state.dart';
 
 class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
-  PersonalDataBloc() : super(PersonalDataInitial()) {
-    on<PersonalDataEvent>((event, emit) {});
+  final ProfileRepo _profileRepo;
+
+  PersonalDataBloc(this._profileRepo) : super(PersonalDataInitial()) {
+    on<PersonalDataEvent>((event, emit) async {
+      if (event is PickImageEvent) {
+        image = await _profileRepo.pickImage();
+        emit(PickImageSuccess());
+      }
+    });
   }
 
+  File? image;
   List<TextFieldModel> textFieldList(BuildContext context) {
     return [
       TextFieldModel(header: "Full Name", hintText: "Full Name"),

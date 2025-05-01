@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'pick_image_widget.dart';
+import '../../manager/personal_data/personal_data_bloc.dart';
 import 'profile_image_widget.dart';
 
 class PersonalDataImage extends StatelessWidget {
@@ -8,12 +9,14 @@ class PersonalDataImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional(1.1, 1),
-      children: [
-        const ProfileImageWidget(),
-        const PickImageWidget(),
-      ],
+    final image = context.read<PersonalDataBloc>();
+    return BlocBuilder<PersonalDataBloc, PersonalDataState>(
+      builder: (context, state) {
+        return ProfileImageWidget(
+            child: image.image == null
+                ? null
+                : Image.file(image.image!,fit: BoxFit.fill));
+      },
     );
   }
 }

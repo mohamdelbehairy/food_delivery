@@ -20,4 +20,3 @@ class ProfileUserData extends StatelessWidget {
     );
   }
 }
-

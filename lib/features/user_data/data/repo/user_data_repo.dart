@@ -6,4 +6,5 @@ abstract class UserDataRepo {
   Future<void> addUserData(UserDataModel userDataModel);
   void getUserData(void Function(QuerySnapshot<Map<String, dynamic>>)? onData);
   Future<bool> isUserExist(String userID);
+  Future<void> updateUserData(UserDataModel userDataModel);
 }

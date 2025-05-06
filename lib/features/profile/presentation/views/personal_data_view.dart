@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery/features/user_data/data/model/user_data_model.dart';
+import 'package:food_delivery/core/utils/helper.dart';
 
+import '../../../user_data/data/model/user_data_model.dart';
+import '../../../user_data/data/repo/user_data_repo_impl.dart';
 import '../../data/repo/profile_repo_impl.dart';
 import '../manager/personal_data/personal_data_bloc.dart';
 import 'widgets/personal_data_app_bar.dart';
@@ -14,12 +16,12 @@ class PersonalDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          PersonalDataBloc(ProfileRepoImpl())..initTextField(userDataModel),
-      child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: personalDataAppBar(context),
-          body: PersonalDataViewBody(imageUrl: userDataModel.userImage)),
-    );
+        create: (context) => PersonalDataBloc(
+            ProfileRepoImpl(), Helper.getIt.get<UserDataRepoImpl>())
+          ..initTextField(userDataModel),
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: personalDataAppBar(context),
+            body: PersonalDataViewBody(imageUrl: userDataModel.userImage)));
   }
 }

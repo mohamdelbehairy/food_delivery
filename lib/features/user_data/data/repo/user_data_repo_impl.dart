@@ -29,4 +29,12 @@ class UserDataRepoImpl extends UserDataRepo {
         .get();
     return doc.exists;
   }
+
+  @override
+  Future<void> updateUserData(UserDataModel userDataModel) async {
+    await FirebaseFirestore.instance
+        .collection(Constants.userCollection)
+        .doc(userDataModel.userID)
+        .update(userDataModel.toJson());
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../../core/widgets/custom_scroll_view_widget.dart';
 import '../../manager/personal_data/personal_data_bloc.dart';
@@ -14,7 +15,12 @@ class PersonalDataViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personalData = context.read<PersonalDataBloc>();
-    return BlocBuilder<PersonalDataBloc, PersonalDataState>(
+    return BlocConsumer<PersonalDataBloc, PersonalDataState>(
+      listener: (context, state) {
+        if (state is UpdateUserData) {
+          Navigation.pop(context);
+        }
+      },
       builder: (context, state) {
         return CustomScrollViewWidget(
           formKey: personalData.formKey,
@@ -25,7 +31,7 @@ class PersonalDataViewBody extends StatelessWidget {
               const SizedBox(height: 24),
               const PersonalDataListView(),
               const SizedBox(height: 32),
-              const PersonalDataButton(),
+              PersonalDataButton(),
             ],
           ),
         );

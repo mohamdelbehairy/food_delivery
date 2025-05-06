@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 
-Future<DateTime?> personalDataPickDate(BuildContext context) {
+Future<DateTime?> personalDataPickDate(BuildContext context,
+    {DateTime? initialDate}) {
   return showDatePicker(
       context: context,
-      initialDate: DateTime(2000),
+      initialDate: initialDate ?? DateTime(2000),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       initialEntryMode: DatePickerEntryMode.inputOnly,

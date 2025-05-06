@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,11 +23,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           onTap: () => Navigation.push(
               context, PersonalDataView(userDataModel: userDataModel!))),
       ProfileItemModel(
-          title: 'Settings',
-          leading: Assets.imagesSettings,
-          onTap: () {
-            log("user data: ${userDataModel?.userName}");
-          }),
+          title: 'Settings', leading: Assets.imagesSettings, onTap: () {}),
       ProfileItemModel(
           title: 'Extra Card', leading: Assets.imagesExtraCard, onTap: () {}),
     ];

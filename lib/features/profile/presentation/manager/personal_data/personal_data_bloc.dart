@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/model/text_field_model.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
+import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/repo/profile_repo.dart';
 import '../../views/widgets/gender_bottom_sheet.dart';
 import '../../views/widgets/personal_data_pick_date.dart';
@@ -14,8 +16,10 @@ part 'personal_data_state.dart';
 
 class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
   final ProfileRepo _profileRepo;
+  final UserDataRepo _dataRepo;
 
-  PersonalDataBloc(this._profileRepo) : super(PersonalDataInitial()) {
+  PersonalDataBloc(this._profileRepo, this._dataRepo)
+      : super(PersonalDataInitial()) {
     on<PersonalDataEvent>((event, emit) async {
       if (event is PickImageEvent) {
         image = await _profileRepo.pickImage();
@@ -24,6 +28,18 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
       if (event is SavePersonalDataEvent) {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
+
+          if (_dateOfBirthController!.text.isNotEmpty &&
+              _userDataModel?.dateOfBirth !=
+                  _dateOfBirthController!.text.trim()) {
+            isLoading = true;
+            UserDataModel userDataModel = _userDataModel!.copyWith(
+              userName: _fullNameController!.text.trim(),
+              dateOfBirth: _dateOfBirthController!.text.trim(),
+            );
+            await _dataRepo.updateUserData(userDataModel);
+            emit(UpdateUserData());
+          }
         }
       }
     });
@@ -31,6 +47,8 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
 
   File? image;
   String? dateOfBirth;
+  UserDataModel? _userDataModel;
+  bool isLoading = false;
 
   TextEditingController? _fullNameController;
   TextEditingController? _dateOfBirthController;
@@ -41,8 +59,10 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   void initTextField(UserDataModel userDataModel) {
+    _userDataModel = userDataModel;
     _fullNameController = TextEditingController(text: userDataModel.userName);
-    _dateOfBirthController = TextEditingController(text: null);
+    _dateOfBirthController =
+        TextEditingController(text: userDataModel.dateOfBirth);
     _genderController = TextEditingController(text: null);
     _phoneController = TextEditingController(text: null);
     _emailController = TextEditingController(text: userDataModel.userEmail);
@@ -68,7 +88,9 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
           controller: _dateOfBirthController,
           suffixIcon: GestureDetector(
             onTap: () async {
-              final date = await personalDataPickDate(context);
+              final date = await personalDataPickDate(context,
+                  initialDate:
+                      DateFormat("dd/MM/yyyy").parseStrict("${_userDataModel?.dateOfBirth!}"));
               if (date == null) return;
               dateOfBirth =
                   "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";

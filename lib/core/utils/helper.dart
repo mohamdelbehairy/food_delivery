@@ -10,8 +10,11 @@ import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/custom_svg.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 import 'package:food_delivery/core/utils/styles.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/home/presentation/views/home_view.dart';
+import '../../features/user_data/data/repo/user_data_repo_impl.dart';
 
 abstract class Helper {
   static OutlineInputBorder buildBorder() {
@@ -128,5 +131,12 @@ abstract class Helper {
       Navigation.go(context, const HomeView());
     });
     return Future.value();
+  }
+
+  static final getIt = GetIt.instance;
+
+  static void setupLocator() {
+    getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
+    getIt.registerSingleton<UserDataRepoImpl>(UserDataRepoImpl());
   }
 }

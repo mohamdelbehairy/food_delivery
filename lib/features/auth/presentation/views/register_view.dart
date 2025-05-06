@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/utils/helper.dart';
 
-import '../../../profile/data/repo/profile_repo_impl.dart';
+import '../../../user_data/data/repo/user_data_repo_impl.dart';
 import '../../data/repo/auth_repo_impl.dart';
 import '../manager/auth/auth_bloc.dart';
 import 'widgets/register_view_body.dart';
@@ -12,7 +13,8 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(AuthRepoImpl(), ProfileRepoImpl()),
+      create: (context) => AuthBloc(Helper.getIt.get<AuthRepoImpl>(),
+          Helper.getIt.get<UserDataRepoImpl>()),
       child: const Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(child: RegisterViewBody()),

@@ -1,28 +1,35 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 
+import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/profile_item_model.dart';
-import '../../../data/model/user_data_model.dart';
-import '../../../data/repo/profile_repo.dart';
+import '../../../../user_data/data/model/user_data_model.dart';
 import '../../views/personal_data_view.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._profileRepo) : super(ProfileInitial());
-  final ProfileRepo _profileRepo;
+  ProfileCubit(this._userDataRepo) : super(ProfileInitial());
+  final UserDataRepo _userDataRepo;
 
   List<ProfileItemModel> profileItems(BuildContext context) {
     return [
       ProfileItemModel(
           title: 'Personal Data',
           leading: Assets.imagesPersonalData,
-          onTap: () => Navigation.push(context, const PersonalDataView())),
+          onTap: () => Navigation.push(
+              context, PersonalDataView(userDataModel: userDataModel!))),
       ProfileItemModel(
-          title: 'Settings', leading: Assets.imagesSettings, onTap: () {}),
+          title: 'Settings',
+          leading: Assets.imagesSettings,
+          onTap: () {
+            log("user data: ${userDataModel?.userName}");
+          }),
       ProfileItemModel(
           title: 'Extra Card', leading: Assets.imagesExtraCard, onTap: () {}),
     ];
@@ -43,8 +50,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     ];
   }
 
+  UserDataModel? userDataModel;
   void getUserData() {
-    _profileRepo.getUserData((snapshot) {
+    _userDataRepo.getUserData((snapshot) {
       if (snapshot.docs.isEmpty) return;
 
       List<UserDataModel> users = snapshot.docs
@@ -53,7 +61,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       final user = users.firstWhere(
           (elemnt) => elemnt.userID == FirebaseAuth.instance.currentUser!.uid);
-
+      userDataModel = user;
       emit(GetUserDataSuccess(userDataModel: user));
     });
   }

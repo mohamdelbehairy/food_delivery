@@ -17,6 +17,7 @@ Future<void> initMaint() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await SharedPrefService.init();
+  Helper.setupLocator();
 
   runApp(const FoodDelivery());
 }

@@ -7,10 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';
-import 'package:food_delivery/features/profile/data/model/user_data_model.dart';
-import 'package:food_delivery/features/profile/data/repo/profile_repo.dart';
 
 import '../../../../../core/utils/services/shared_pref_service.dart';
+import '../../../../user_data/data/model/user_data_model.dart';
+import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/provider_item_model.dart';
 import '../../../../../core/model/text_field_model.dart';
 import '../../../data/repo/auth_repo.dart';
@@ -19,8 +19,8 @@ import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _authRepo;
-  final ProfileRepo _profileRepo;
-  AuthBloc(this._authRepo, this._profileRepo) : super(AuthInitial()) {
+  final UserDataRepo _userDataRepo;
+  AuthBloc(this._authRepo, this._userDataRepo) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
       if (event is LoginVisbleEvent) {
@@ -73,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .registerEmail(_registerEmailController.text,
                     _registerPasswordController.text)
                 .then((value) async {
-              await _profileRepo.addUserData(UserDataModel(
+              await _userDataRepo.addUserData(UserDataModel(
                   userName: _registerUserNameController.text,
                   userID: FirebaseAuth.instance.currentUser!.uid,
                   userEmail: _registerEmailController.text));
@@ -99,8 +99,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _authRepo.loginUsingGoogle().then((value) async {
           if (value != null) {
-            if (!await _profileRepo.isUserExist(value.user!.uid)) {
-              await _profileRepo.addUserData(UserDataModel(
+            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
+              await _userDataRepo.addUserData(UserDataModel(
                   userName: value.user?.displayName ?? "",
                   userID: value.user?.uid ?? "",
                   userEmail: value.user?.email ?? "",
@@ -127,8 +127,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _authRepo.loginUsingFacebook().then((value) async {
           if (value != null) {
-            if (!await _profileRepo.isUserExist(value.user!.uid)) {
-              await _profileRepo.addUserData(UserDataModel(
+            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
+              await _userDataRepo.addUserData(UserDataModel(
                   userName: value.user?.displayName ?? "",
                   userID: value.user?.uid ?? "",
                   userEmail: value.user?.email ?? "",
@@ -156,8 +156,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _authRepo.loginUsingTwitter().then((value) async {
           if (value != null) {
-            if (!await _profileRepo.isUserExist(value.user!.uid)) {
-              await _profileRepo.addUserData(UserDataModel(
+            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
+              await _userDataRepo.addUserData(UserDataModel(
                   userName: value.user?.displayName ?? "",
                   userID: value.user?.uid ?? "",
                   userEmail: value.user?.email ?? "",

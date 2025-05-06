@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/model/text_field_model.dart';
+import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../data/repo/profile_repo.dart';
 import '../../views/widgets/gender_bottom_sheet.dart';
 import '../../views/widgets/personal_data_pick_date.dart';
@@ -31,13 +32,21 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
   File? image;
   String? dateOfBirth;
 
-  final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _dateOfBirthController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  TextEditingController? _fullNameController;
+  TextEditingController? _dateOfBirthController;
+  TextEditingController? _genderController;
+  TextEditingController? _phoneController;
+  TextEditingController? _emailController;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  void initTextField(UserDataModel userDataModel) {
+    _fullNameController = TextEditingController(text: userDataModel.userName);
+    _dateOfBirthController = TextEditingController(text: null);
+    _genderController = TextEditingController(text: null);
+    _phoneController = TextEditingController(text: null);
+    _emailController = TextEditingController(text: userDataModel.userEmail);
+  }
 
   List<TextFieldModel> textFieldList(BuildContext context) {
     return [
@@ -63,7 +72,7 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
               if (date == null) return;
               dateOfBirth =
                   "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
-              _dateOfBirthController.text = dateOfBirth ?? "";
+              _dateOfBirthController!.text = dateOfBirth ?? "";
             },
             child: Icon(Icons.calendar_month_outlined,
                 size: 20, color: const Color(0xff101010)),
@@ -87,6 +96,7 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
       ),
       TextFieldModel(
           header: "Phone",
+          readOnly: true,
           hintText: "+1 (123) 456-7890",
           controller: _phoneController),
       TextFieldModel(
@@ -99,11 +109,11 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
 
   @override
   Future<void> close() {
-    _fullNameController.dispose();
-    _dateOfBirthController.dispose();
-    _genderController.dispose();
-    _phoneController.dispose();
-    _emailController.dispose();
+    _fullNameController?.dispose();
+    _dateOfBirthController?.dispose();
+    _genderController?.dispose();
+    _phoneController?.dispose();
+    _emailController?.dispose();
 
     return super.close();
   }

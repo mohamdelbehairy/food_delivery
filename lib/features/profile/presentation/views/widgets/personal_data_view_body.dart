@@ -8,7 +8,8 @@ import 'personal_data_image_widget.dart';
 import 'personal_data_list_view.dart';
 
 class PersonalDataViewBody extends StatelessWidget {
-  const PersonalDataViewBody({super.key});
+  const PersonalDataViewBody({super.key, this.imageUrl});
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class PersonalDataViewBody extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 24),
-              PersonalDataImageWidget(),
+              PersonalDataImageWidget(imageUrl: imageUrl),
               const SizedBox(height: 24),
               const PersonalDataListView(),
               const SizedBox(height: 32),

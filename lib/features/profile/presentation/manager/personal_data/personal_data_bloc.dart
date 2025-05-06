@@ -29,16 +29,45 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
 
-          if (_dateOfBirthController!.text.isNotEmpty &&
+          final isNameChanged = _fullNameController!.text.isNotEmpty &&
+              _userDataModel?.userName != _fullNameController!.text.trim();
+
+          final isDateChanged = _dateOfBirthController!.text.isNotEmpty &&
               _userDataModel?.dateOfBirth !=
-                  _dateOfBirthController!.text.trim()) {
+                  _dateOfBirthController!.text.trim();
+
+          bool isImageChanged = false;
+          if (image != null && _userDataModel?.imageFile != null) {
+            final newImageLength = await File(image!.path).length();
+            final oldImageLength =
+                await File(_userDataModel!.imageFile!).length();
+            isImageChanged = newImageLength != oldImageLength;
+          } else {
+            isImageChanged = image != null;
+          }
+
+          if (isNameChanged || isDateChanged || isImageChanged) {
             isLoading = true;
-            UserDataModel userDataModel = _userDataModel!.copyWith(
-              userName: _fullNameController!.text.trim(),
-              dateOfBirth: _dateOfBirthController!.text.trim(),
-            );
-            await _dataRepo.updateUserData(userDataModel);
-            emit(UpdateUserData());
+            emit(PersonalDataLoading());
+
+            if (isNameChanged || isDateChanged) {
+              final userDataModel = _userDataModel!.copyWith(
+                  userName: _fullNameController!.text.trim(),
+                  dateOfBirth: _dateOfBirthController!.text.trim());
+              await _dataRepo.updateUserData(userDataModel);
+            }
+
+            if (isImageChanged) {
+              final imageUrl = await _profileRepo.storgeImage(image!);
+              final userDataModel = _userDataModel!.copyWith(
+                  imageFile: image?.path,
+                  userImage: imageUrl,
+                  userName: _fullNameController!.text.trim(),
+                  dateOfBirth: _dateOfBirthController!.text.trim());
+              await _dataRepo.updateUserData(userDataModel);
+            }
+
+            emit(UpdateUserDataSuccess());
           }
         }
       }
@@ -89,8 +118,11 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
           suffixIcon: GestureDetector(
             onTap: () async {
               final date = await personalDataPickDate(context,
-                  initialDate:
-                      DateFormat("dd/MM/yyyy").parseStrict("${_userDataModel?.dateOfBirth!}"));
+                  initialDate: _userDataModel?.dateOfBirth == null ||
+                          _userDataModel!.dateOfBirth!.isEmpty
+                      ? null
+                      : DateFormat("dd/MM/yyyy")
+                          .parseStrict("${_userDataModel?.dateOfBirth}"));
               if (date == null) return;
               dateOfBirth =
                   "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";

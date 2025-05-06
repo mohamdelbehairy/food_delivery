@@ -1,6 +1,6 @@
 class UserDataModel {
   final String userName, userID, userEmail;
-  final String? userImage, gender, dateOfBirth;
+  final String? userImage, gender, dateOfBirth, imageFile;
 
   UserDataModel(
       {required this.userName,
@@ -8,7 +8,8 @@ class UserDataModel {
       required this.userEmail,
       this.userImage,
       this.gender,
-      this.dateOfBirth});
+      this.dateOfBirth,
+      this.imageFile});
 
   factory UserDataModel.fromJson(json) {
     return UserDataModel(
@@ -17,7 +18,8 @@ class UserDataModel {
         userEmail: json['userEmail'],
         userImage: json['userImage'],
         gender: json['gender'],
-        dateOfBirth: json['dateOfBirth']);
+        dateOfBirth: json['dateOfBirth'],
+        imageFile: json['imageFile']);
   }
 
   toJson() {
@@ -27,7 +29,8 @@ class UserDataModel {
       'userEmail': userEmail,
       'userImage': userImage,
       'gender': gender,
-      'dateOfBirth': dateOfBirth
+      'dateOfBirth': dateOfBirth,
+      'imageFile': imageFile
     };
   }
 
@@ -38,6 +41,7 @@ class UserDataModel {
     String? userImage,
     String? gender,
     String? dateOfBirth,
+    String? imageFile,
   }) {
     return UserDataModel(
       userName: userName ?? this.userName,
@@ -46,6 +50,7 @@ class UserDataModel {
       userImage: userImage ?? this.userImage,
       gender: gender ?? this.gender,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      imageFile: imageFile ?? this.imageFile,
     );
   }
 }

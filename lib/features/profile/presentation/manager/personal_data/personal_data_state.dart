@@ -8,4 +8,4 @@ final class PickImageSuccess extends PersonalDataState {}
 
 final class PersonalDataLoading extends PersonalDataState {}
 
-final class UpdateUserData extends PersonalDataState {}
+final class UpdateUserDataSuccess extends PersonalDataState {}

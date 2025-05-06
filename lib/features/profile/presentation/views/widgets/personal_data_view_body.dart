@@ -17,7 +17,7 @@ class PersonalDataViewBody extends StatelessWidget {
     final personalData = context.read<PersonalDataBloc>();
     return BlocConsumer<PersonalDataBloc, PersonalDataState>(
       listener: (context, state) {
-        if (state is UpdateUserData) {
+        if (state is UpdateUserDataSuccess) {
           Navigation.pop(context);
         }
       },

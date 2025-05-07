@@ -12,26 +12,22 @@ class BottomNavBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final home = context.read<HomeBloc>();
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
-        return ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-          child: BottomNavigationBar(
-            currentIndex: home.currentIndex,
-            backgroundColor: Colors.white,
-            type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: Styles.medium10,
-            selectedItemColor: AppColors.primaryColor,
-            onTap: (index) => home.add(ChangeBottomNavEvent(index: index)),
-            items: home.bottomNavItems
-                .asMap()
-                .entries
-                .map((e) => bottomNavBarItem(
-                    e.value, e.value.index == home.currentIndex))
-                .toList(),
-          ),
-        );
-      },
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      child: BottomNavigationBar(
+        currentIndex: home.currentIndex,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: Styles.medium10,
+        selectedItemColor: AppColors.primaryColor,
+        onTap: (index) => home.add(ChangeBottomNavEvent(index: index)),
+        items: home.bottomNavItems
+            .asMap()
+            .entries
+            .map((e) =>
+                bottomNavBarItem(e.value, e.value.index == home.currentIndex))
+            .toList(),
+      ),
     );
   }
 }

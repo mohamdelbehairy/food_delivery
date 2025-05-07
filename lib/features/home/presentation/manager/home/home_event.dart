@@ -7,3 +7,8 @@ class ChangeBottomNavEvent extends HomeEvent {
 
   ChangeBottomNavEvent({required this.index});
 }
+
+class UserDataUpdatedEvent extends HomeEvent {
+  final UserDataModel userDataModel;
+  UserDataUpdatedEvent(this.userDataModel);
+}

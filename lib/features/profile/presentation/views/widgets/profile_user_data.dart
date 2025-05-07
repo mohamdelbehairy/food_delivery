@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 
-import '../../manager/profile/profile_cubit.dart';
+import '../../../../home/presentation/manager/home/home_bloc.dart';
 import 'profile_user_data_image.dart';
 
 class ProfileUserData extends StatelessWidget {
@@ -10,22 +10,20 @@ class ProfileUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    final userData = context.read<HomeBloc>();
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        if (state is GetUserDataSuccess) {
-          return Column(
-            children: [
-              ProfileUserDataImage(userImage: state.userDataModel.userImage),
-              const SizedBox(height: 20),
-              Text(state.userDataModel.userName, style: Styles.semiBold16),
-              const SizedBox(height: 4),
-              Text(state.userDataModel.userEmail,
-                  style: Styles.reqular14
-                      .copyWith(color: const Color(0xff878787))),
-            ],
-          );
-        }
-        return const SizedBox();
+        return Column(
+          children: [
+            ProfileUserDataImage(userImage: userData.userDataModel?.userImage),
+            const SizedBox(height: 20),
+            Text(userData.userDataModel!.userName, style: Styles.semiBold16),
+            const SizedBox(height: 4),
+            Text(userData.userDataModel!.userEmail,
+                style:
+                    Styles.reqular14.copyWith(color: const Color(0xff878787))),
+          ],
+        );
       },
     );
   }

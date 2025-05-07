@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../manager/profile/profile_cubit.dart';
+import '../../../../home/presentation/manager/home/home_bloc.dart';
 import 'profile_title_and_list_view_section.dart';
 
 class ProfileAndSupportSection extends StatelessWidget {
@@ -9,7 +9,7 @@ class ProfileAndSupportSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profile = context.read<ProfileCubit>();
+    final profile = context.read<HomeBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

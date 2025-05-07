@@ -5,3 +5,5 @@ sealed class HomeState {}
 final class HomeInitial extends HomeState {}
 
 final class ChangeBottomNavState extends HomeState {}
+
+final class GetUserDataSuccess extends HomeState {}

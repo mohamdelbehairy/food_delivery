@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 
@@ -14,8 +16,9 @@ class UserDataRepoImpl extends UserDataRepo {
   }
 
   @override
-  void getUserData(void Function(QuerySnapshot<Map<String, dynamic>>)? onData) {
-    FirebaseFirestore.instance
+  StreamSubscription getUserData(
+      Function(QuerySnapshot<Map<String, dynamic>>)? onData) {
+    return FirebaseFirestore.instance
         .collection(Constants.userCollection)
         .snapshots()
         .listen(onData);

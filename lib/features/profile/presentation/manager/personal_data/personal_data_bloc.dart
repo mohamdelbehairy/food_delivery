@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/utils/navigation.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/model/text_field_model.dart';
+import '../../../../home/presentation/manager/home/home_bloc.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/repo/profile_repo.dart';
@@ -36,6 +38,9 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
               _userDataModel?.dateOfBirth !=
                   _dateOfBirthController!.text.trim();
 
+          final isGenderChanged = _genderController!.text.isNotEmpty &&
+              _userDataModel?.gender != _genderController!.text.trim();
+
           bool isImageChanged = false;
           if (image != null && _userDataModel?.imageFile != null) {
             final newImageLength = await File(image!.path).length();
@@ -46,14 +51,19 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
             isImageChanged = image != null;
           }
 
-          if (isNameChanged || isDateChanged || isImageChanged) {
+          if (isNameChanged ||
+              isDateChanged ||
+              isGenderChanged ||
+              isImageChanged) {
             isLoading = true;
             emit(PersonalDataLoading());
 
-            if (isNameChanged || isDateChanged) {
+            if (isNameChanged || isDateChanged || isGenderChanged) {
               final userDataModel = _userDataModel!.copyWith(
-                  userName: _fullNameController!.text.trim(),
-                  dateOfBirth: _dateOfBirthController!.text.trim());
+                userName: _fullNameController!.text.trim(),
+                gender: _genderController!.text.trim(),
+                dateOfBirth: _dateOfBirthController!.text.trim(),
+              );
               await _dataRepo.updateUserData(userDataModel);
             }
 
@@ -63,6 +73,7 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
                   imageFile: image?.path,
                   userImage: imageUrl,
                   userName: _fullNameController!.text.trim(),
+                  gender: _genderController!.text.trim(),
                   dateOfBirth: _dateOfBirthController!.text.trim());
               await _dataRepo.updateUserData(userDataModel);
             }
@@ -75,7 +86,7 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
   }
 
   File? image;
-  String? dateOfBirth;
+  String? _dateOfBirth, gender;
   UserDataModel? _userDataModel;
   bool isLoading = false;
 
@@ -87,12 +98,12 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void initTextField(UserDataModel userDataModel) {
+  void initTextField(BuildContext context, UserDataModel userDataModel) {
     _userDataModel = userDataModel;
     _fullNameController = TextEditingController(text: userDataModel.userName);
     _dateOfBirthController =
         TextEditingController(text: userDataModel.dateOfBirth);
-    _genderController = TextEditingController(text: null);
+    _genderController = TextEditingController(text: userDataModel.gender);
     _phoneController = TextEditingController(text: null);
     _emailController = TextEditingController(text: userDataModel.userEmail);
   }
@@ -124,23 +135,37 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
                       : DateFormat("dd/MM/yyyy")
                           .parseStrict("${_userDataModel?.dateOfBirth}"));
               if (date == null) return;
-              dateOfBirth =
+              _dateOfBirth =
                   "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
-              _dateOfBirthController!.text = dateOfBirth ?? "";
+              _dateOfBirthController!.text = _dateOfBirth ?? "";
             },
             child: Icon(Icons.calendar_month_outlined,
                 size: 20, color: const Color(0xff101010)),
           )),
       TextFieldModel(
         header: "Gender",
-        hintText: "Male",
+        hintText: "Gender",
         readOnly: true,
         controller: _genderController,
         suffixIcon: GestureDetector(
-          onTap: () => showModalBottomSheet(
-              context: context,
-              backgroundColor: Colors.white,
-              builder: (context) => GenderBottomSheet()),
+          onTap: () async {
+            final result = await showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.white,
+                builder: (context) => GenderBottomSheet(
+                      onTap: () {
+                        int index = context.read<HomeBloc>().genderCurrentIndex;
+                        if (index == -1) return;
+                        gender = index == 0 ? "Male" : "Female";
+                        _genderController!.text = gender ?? "";
+                        Navigation.pop(context);
+                      },
+                    ));
+            if (result == null) {
+              // ignore: use_build_context_synchronously
+              context.read<HomeBloc>().genderCurrentIndex = -1;
+            }
+          },
           child: Transform.rotate(
             angle: -90 * 3.14 / 180,
             child: Icon(Icons.arrow_back_ios_new_outlined,

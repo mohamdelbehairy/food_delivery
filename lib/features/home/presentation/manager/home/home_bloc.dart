@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 
+import '../../../../profile/data/model/gender_item_model.dart';
 import '../../../../profile/data/model/profile_item_model.dart';
 import '../../../../profile/presentation/views/personal_data_view.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
@@ -24,6 +25,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (event.index == currentIndex) return;
         currentIndex = event.index;
         emit(ChangeBottomNavState());
+      }
+
+      if (event is GenderEvent) {
+        if (event.index == genderCurrentIndex) return;
+        genderCurrentIndex = event.index;
+        emit(ChangeGenderIndex());
       }
     });
 
@@ -84,10 +91,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<ProfileItemModel> supportItems() {
     return [
       ProfileItemModel(
-        title: 'Help Center',
-        leading: Assets.imagesHelpCenter,
-        onTap: () {},
-      ),
+          title: 'Help Center', leading: Assets.imagesHelpCenter, onTap: () {}),
       ProfileItemModel(
           title: 'Request Account Deletion',
           leading: Assets.imagesDeleteAccount,
@@ -98,6 +102,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           onTap: () {}),
     ];
   }
+
+  // gender item
+  int genderCurrentIndex = -1;
+
+  List<GenderItemModel> genderList = [
+    GenderItemModel(icon: Icons.male, title: "Male"),
+    GenderItemModel(icon: Icons.female, title: "Female"),
+  ];
 
   @override
   Future<void> close() {

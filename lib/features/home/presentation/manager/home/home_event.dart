@@ -12,3 +12,9 @@ class UserDataUpdatedEvent extends HomeEvent {
   final UserDataModel userDataModel;
   UserDataUpdatedEvent(this.userDataModel);
 }
+
+class GenderEvent extends HomeEvent {
+  final int index;
+
+  GenderEvent({required this.index});
+}

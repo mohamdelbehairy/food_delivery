@@ -18,7 +18,7 @@ class PersonalDataView extends StatelessWidget {
     return BlocProvider(
         create: (context) => PersonalDataBloc(
             ProfileRepoImpl(), Helper.getIt.get<UserDataRepoImpl>())
-          ..initTextField(userDataModel),
+          ..initTextField(context, userDataModel),
         child: Scaffold(
             backgroundColor: Colors.white,
             appBar: personalDataAppBar(context),

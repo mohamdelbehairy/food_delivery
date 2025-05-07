@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../manager/gender/gender_cubit.dart';
+import '../../../../home/presentation/manager/home/home_bloc.dart';
 import 'gender_bottom_sheet_item.dart';
 
 class GenderBottomSheetListView extends StatelessWidget {
@@ -9,8 +9,8 @@ class GenderBottomSheetListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gender = context.read<GenderCubit>();
-    return BlocBuilder<GenderCubit, GenderState>(
+    final gender = context.read<HomeBloc>();
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Column(
           spacing: 16,
@@ -19,9 +19,9 @@ class GenderBottomSheetListView extends StatelessWidget {
               .asMap()
               .entries
               .map((e) => GestureDetector(
-                  onTap: () => gender.changeIndex(e.key),
+                  onTap: () => gender.add(GenderEvent(index: e.key)),
                   child: GenderBottomSheetItem(
-                      isActive: gender.currentIndex == e.key,
+                      isActive: gender.genderCurrentIndex == e.key,
                       genderItemModel: e.value)))
               .toList(),
         );

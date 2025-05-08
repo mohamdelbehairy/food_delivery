@@ -53,6 +53,12 @@ abstract class Styles {
       color: Color(0xff101010),
       fontWeight: FontWeight.w600);
 
+  static const semiBold22 = TextStyle(
+      fontSize: 22,
+      fontFamily: "inter",
+      color: Color(0xff101010),
+      fontWeight: FontWeight.w600);
+
   // urbainst font
   static TextStyle styleBoldUrbainst24 = TextStyle(
       fontSize: 24,

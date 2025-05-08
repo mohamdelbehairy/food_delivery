@@ -13,6 +13,7 @@ import 'package:food_delivery/core/utils/styles.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/auth/data/repo/auth_repo_impl.dart';
+import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/user_data/data/repo/user_data_repo_impl.dart';
 
@@ -85,7 +86,8 @@ abstract class Helper {
         message: "Check your email to reset your password for Food Delivery.");
   }
 
-  static Future<Object?> showAlertWidget(BuildContext context) {
+  static Future<Object?> showAlertWidget(BuildContext context,
+      {bool? isLogOut}) {
     showGeneralDialog(
         context: context,
         pageBuilder: (_, __, ___) => Material(
@@ -104,12 +106,13 @@ abstract class Helper {
                       CustomSvg(
                           svgModel: SvgModel(image: Assets.imagesLoginSuccess)),
                       const SizedBox(height: 24),
-                      Text('Sign In\n Successful',
+                      Text(
+                          '${isLogOut == true ? "Log Out" : "Sign In"}\n Successful',
                           textAlign: TextAlign.center,
                           style: Styles.styleBoldUrbainst24),
                       const SizedBox(height: 16),
                       Text(
-                          'Please wait...\n You will be directed to the homepage soon.',
+                          'Please wait...\n You will be directed to the ${isLogOut == true ? "loginpage" : "homepage"} soon.',
                           textAlign: TextAlign.center,
                           style: Styles.styleMediumUrbainst16),
                       const SizedBox(height: 32),
@@ -128,7 +131,10 @@ abstract class Helper {
             ));
     Future.delayed(const Duration(seconds: 3), () {
       // ignore: use_build_context_synchronously
-      Navigation.go(context, const HomeView());
+      Navigation.go(
+          // ignore: use_build_context_synchronously
+          context,
+          isLogOut == true ? const LoginView() : const HomeView());
     });
     return Future.value();
   }

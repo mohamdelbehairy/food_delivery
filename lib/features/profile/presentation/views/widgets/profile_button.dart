@@ -6,6 +6,7 @@ import 'package:food_delivery/core/utils/custom_svg.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
+import 'profile_sign_out_show_dialog.dart';
 
 class ProfileButton extends StatelessWidget {
   const ProfileButton({super.key});
@@ -14,7 +15,8 @@ class ProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomButton(
         buttonModel: ButtonModel(
-      onTap: () {},
+      onTap: () => showDialog(
+          context: context, builder: (context) => ProfileSignOutShowDialog()),
       border: Border.all(color: const Color(0xffD6D6D6)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,3 +30,4 @@ class ProfileButton extends StatelessWidget {
     ));
   }
 }
+

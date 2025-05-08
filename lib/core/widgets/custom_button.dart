@@ -15,8 +15,8 @@ class CustomButton extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: buttonModel.onTap,
       child: Container(
-        height: 52,
-        width: double.infinity,
+        height: buttonModel.height ?? 52,
+        width: buttonModel.width ?? double.infinity,
         decoration: BoxDecoration(
             color: buttonModel.color,
             border: buttonModel.border,

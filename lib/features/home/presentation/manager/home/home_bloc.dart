@@ -9,6 +9,7 @@ import 'package:food_delivery/core/utils/navigation.dart';
 import '../../../../profile/data/model/gender_item_model.dart';
 import '../../../../profile/data/model/profile_item_model.dart';
 import '../../../../profile/presentation/views/personal_data_view.dart';
+import '../../../../profile/presentation/views/setting_view.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/bottom_nav_model.dart';
@@ -82,7 +83,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           onTap: () => Navigation.push(
               context, PersonalDataView(userDataModel: userDataModel!))),
       ProfileItemModel(
-          title: 'Settings', leading: Assets.imagesSettings, onTap: () {}),
+          title: 'Settings',
+          leading: Assets.imagesSettings,
+          onTap: () => Navigation.push(context, const SettingView())),
       ProfileItemModel(
           title: 'Extra Card', leading: Assets.imagesExtraCard, onTap: () {}),
     ];

@@ -6,9 +6,9 @@ import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../../core/widgets/custom_app_bar.dart';
 
-AppBar personalDataAppBar(BuildContext context) {
+AppBar customProfileAppBar(BuildContext context, {String? title}) {
   return customAppBar(
-      title: "Personal Date",
+      title: title ?? "Personal Date",
       leading: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 20),

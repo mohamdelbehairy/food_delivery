@@ -1,7 +1,17 @@
+import 'package:flutter/material.dart';
+
 class ProfileItemModel {
-  final String leading, title;
-  final Function() onTap;
+  final String title;
+  final String? leading;
+  final bool? isSwitch;
+
+  final Widget? trailing;
+  final Function()? onTap;
 
   ProfileItemModel(
-      {required this.leading, required this.title, required this.onTap});
+      {required this.title,
+      this.leading,
+      this.trailing,
+      this.onTap,
+      this.isSwitch});
 }

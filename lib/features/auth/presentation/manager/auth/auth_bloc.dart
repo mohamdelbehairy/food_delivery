@@ -9,6 +9,7 @@ import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../../../../core/utils/services/shared_pref_service.dart';
+import '../../../../../core/utils/services/url_launcher_service.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/provider_item_model.dart';
@@ -20,6 +21,7 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _authRepo;
   final UserDataRepo _userDataRepo;
+  final UrlLauncherService _launcherService = Helper.getIt.get();
   AuthBloc(this._authRepo, this._userDataRepo) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
@@ -33,7 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ChangeVisble());
       }
 
-      if (event is PrivacyPolicyEvent) {
+      if (event is PrivacyPolicyAndTermsEvent) {
         privacyPolicy = !privacyPolicy;
         emit(ChangePrivacyPolicy());
       }
@@ -209,6 +211,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           log("error from logout: $error");
           emit(AuthFailure(errorMessage: error.code));
         });
+      }
+
+      // privacy policy and terms and condition events
+      if (event is PrivacyPolicyEvent) {
+        await _launcherService.openUrl(Constants.privacyPolicyUrl);
+      }
+
+      if (event is TermsAndConditionsEvent) {
+        await _launcherService.openUrl(Constants.termsAndConditionUrl);
       }
     });
   }

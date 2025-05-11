@@ -16,6 +16,7 @@ import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/user_data/data/repo/user_data_repo_impl.dart';
+import 'services/url_launcher_service.dart';
 
 abstract class Helper {
   static OutlineInputBorder buildBorder() {
@@ -144,5 +145,6 @@ abstract class Helper {
   static void setupLocator() {
     getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
     getIt.registerSingleton<UserDataRepoImpl>(UserDataRepoImpl());
+    getIt.registerSingleton<UrlLauncherService>(UrlLauncherService());
   }
 }

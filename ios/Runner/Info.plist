@@ -40,6 +40,13 @@
 		<key>NSMicrophoneUsageDescription</key>
 		<string>We need access to your microphone to record audio while using the app.</string>
 
+		<!-- url launcher permission -->
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>sms</string>
+			<string>tel</string>
+		</array>
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

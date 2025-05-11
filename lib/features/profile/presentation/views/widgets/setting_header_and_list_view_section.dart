@@ -11,14 +11,16 @@ class SettingHeaderAndListViewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final setting = context.read<SettingBloc>();
+    final setting = context.watch<SettingBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(isProfile ? "PROFILE" : "OTHER",
             style: Styles.medium12.copyWith(color: const Color(0xff878787))),
         SettingListView(
-            list: isProfile ? setting.profileItems() : setting.otherItems()),
+            list: isProfile
+                ? setting.profileItems(context)
+                : setting.otherItems(context)),
       ],
     );
   }

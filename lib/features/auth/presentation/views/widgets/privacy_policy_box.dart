@@ -12,7 +12,7 @@ class PrivacyPolicyBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.read<AuthBloc>();
     return GestureDetector(
-        onTap: () => auth.add(PrivacyPolicyEvent()),
+        onTap: () => auth.add(PrivacyPolicyAndTermsEvent()),
         child: Container(
             height: 20,
             width: 20,

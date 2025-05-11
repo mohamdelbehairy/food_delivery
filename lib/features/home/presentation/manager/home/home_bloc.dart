@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/utils/assets.dart';
+import 'package:food_delivery/core/utils/helper.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../profile/data/model/gender_item_model.dart';
@@ -87,7 +88,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           leading: Assets.imagesSettings,
           onTap: () => Navigation.push(context, const SettingView())),
       ProfileItemModel(
-          title: 'Extra Card', leading: Assets.imagesExtraCard, onTap: () {}),
+          title: 'Extra Card',
+          leading: Assets.imagesExtraCard,
+          onTap: () => Helper.customSnackBar(context,
+              message: "This Feature is coming soon.")),
     ];
   }
 

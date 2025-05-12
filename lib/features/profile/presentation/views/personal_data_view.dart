@@ -6,7 +6,7 @@ import '../../../user_data/data/model/user_data_model.dart';
 import '../../../user_data/data/repo/user_data_repo_impl.dart';
 import '../../data/repo/profile_repo_impl.dart';
 import '../manager/personal_data/personal_data_bloc.dart';
-import 'widgets/custom_profile_app_bar.dart';
+import '../../../../core/widgets/custom_profile_app_bar.dart';
 import 'widgets/personal_data_view_body.dart';
 
 class PersonalDataView extends StatelessWidget {

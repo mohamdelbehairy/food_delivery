@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../manager/help_center/help_center_cubit.dart';
-import '../../../profile/presentation/views/widgets/custom_profile_app_bar.dart';
+import '../../../../core/widgets/custom_profile_app_bar.dart';
 import 'widgets/help_center_view_body.dart';
 
 class HelpCenterView extends StatelessWidget {

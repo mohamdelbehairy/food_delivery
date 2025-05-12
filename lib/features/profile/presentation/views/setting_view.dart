@@ -4,7 +4,7 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../../../core/utils/services/url_launcher_service.dart';
 import '../manager/setting/setting_bloc.dart';
-import 'widgets/custom_profile_app_bar.dart';
+import '../../../../core/widgets/custom_profile_app_bar.dart';
 import 'widgets/setting_view_body.dart';
 
 class SettingView extends StatelessWidget {

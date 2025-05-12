@@ -4,12 +4,10 @@ import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/custom_svg.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 
-import '../../../../../core/widgets/custom_app_bar.dart';
+import 'custom_app_bar.dart';
 
-AppBar customProfileAppBar(BuildContext context,
-    {String? title}) {
+AppBar customProfileAppBar(BuildContext context, {String? title}) {
   return customAppBar(
-     
       title: title ?? "Personal Date",
       leading: Center(
         child: Padding(

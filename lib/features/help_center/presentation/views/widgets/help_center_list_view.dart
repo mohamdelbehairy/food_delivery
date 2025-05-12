@@ -16,7 +16,8 @@ class HelpCenterListView extends StatelessWidget {
           color: const Color(0xffF9F9F9).withValues(alpha: .4),
           child: Column(
             spacing: 16,
-            children: helpCenter.helpCenterItem
+            children: helpCenter
+                .helpCenterItem(context)
                 .map((e) => HelpCenterItem(helpCenterModel: e))
                 .toList(),
           ),

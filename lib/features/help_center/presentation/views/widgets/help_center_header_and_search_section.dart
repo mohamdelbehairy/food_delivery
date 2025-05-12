@@ -9,6 +9,7 @@ class HelpCenterHeaderAndSearhSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 28),
         Text("Hi, how we can help you?", style: Styles.semiBold16),

@@ -9,7 +9,7 @@ import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../profile/data/model/gender_item_model.dart';
 import '../../../../profile/data/model/profile_item_model.dart';
-import '../../../../profile/presentation/views/help_center_view.dart';
+import '../../../../help_center/presentation/views/help_center_view.dart';
 import '../../../../profile/presentation/views/personal_data_view.dart';
 import '../../../../profile/presentation/views/setting_view.dart';
 import '../../../../user_data/data/model/user_data_model.dart';

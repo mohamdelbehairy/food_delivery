@@ -12,6 +12,7 @@ class HelpCenterSearchWidget extends StatelessWidget {
     return CustomButton(
         buttonModel: ButtonModel(
       borderRadius: 8,
+      backgroundColor: Colors.white,
       borderColor: const Color(0xffEDEDED),
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Row(

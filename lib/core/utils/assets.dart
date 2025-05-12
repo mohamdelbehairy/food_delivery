@@ -6,6 +6,10 @@ class Assets {
   /// assets/images/add_another_account.svg
   static const String imagesAddAnotherAccount = "assets/images/add_another_account.svg";
 
+  /// Assets for imagesAgents
+  /// assets/images/agents.svg
+  static const String imagesAgents = "assets/images/agents.svg";
+
   /// Assets for imagesArrowBack
   /// assets/images/arrow_back.svg
   static const String imagesArrowBack = "assets/images/arrow_back.svg";
@@ -21,6 +25,10 @@ class Assets {
   /// Assets for imagesBoarding3
   /// assets/images/boarding3.png
   static const String imagesBoarding3 = "assets/images/boarding3.png";
+
+  /// Assets for imagesBuyers
+  /// assets/images/buyers.svg
+  static const String imagesBuyers = "assets/images/buyers.svg";
 
   /// Assets for imagesCard
   /// assets/images/card.svg
@@ -45,6 +53,10 @@ class Assets {
   /// Assets for imagesFacebook
   /// assets/images/facebook.svg
   static const String imagesFacebook = "assets/images/facebook.svg";
+
+  /// Assets for imagesGeneral
+  /// assets/images/general.svg
+  static const String imagesGeneral = "assets/images/general.svg";
 
   /// Assets for imagesGoogle
   /// assets/images/google.svg
@@ -81,6 +93,10 @@ class Assets {
   /// Assets for imagesRectangle
   /// assets/images/Rectangle.png
   static const String imagesRectangle = "assets/images/Rectangle.png";
+
+  /// Assets for imagesSellers
+  /// assets/images/sellers.svg
+  static const String imagesSellers = "assets/images/sellers.svg";
 
   /// Assets for imagesSettings
   /// assets/images/settings.svg

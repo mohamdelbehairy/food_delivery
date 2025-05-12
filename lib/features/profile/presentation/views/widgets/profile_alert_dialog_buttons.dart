@@ -26,14 +26,14 @@ class ProfileAlertDialogButtons extends StatelessWidget {
                     child: Text("Cancel",
                         style: Styles.semiBold14
                             .copyWith(color: const Color(0xff101010)))),
-                border: Border.all(color: const Color(0xffD6D6D6)))),
+                borderColor: const Color(0xffD6D6D6))),
         const SizedBox(width: 12),
         CustomButton(
             buttonModel: ButtonModel(
           height: 48,
           width: 130,
           buttonName: "Log Out",
-          color: AppColors.primaryColor,
+          backgroundColor: AppColors.primaryColor,
           onTap: () => auth.add(LogoutEvent()),
         )),
       ],

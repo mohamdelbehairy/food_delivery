@@ -15,7 +15,7 @@ class PersonalDataButton extends StatelessWidget {
     return CustomButton(
         buttonModel: ButtonModel(
       buttonName: "Save",
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       isLoading: personalData.isLoading,
       onTap: () => personalData.add(SavePersonalDataEvent()),
     ));

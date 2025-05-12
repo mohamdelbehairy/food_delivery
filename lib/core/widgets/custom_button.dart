@@ -17,10 +17,14 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: buttonModel.height ?? 52,
         width: buttonModel.width ?? double.infinity,
+        padding: buttonModel.padding,
+        margin: buttonModel.margin,
         decoration: BoxDecoration(
-            color: buttonModel.color,
-            border: buttonModel.border,
-            borderRadius: BorderRadius.circular(100)),
+            color: buttonModel.backgroundColor,
+            border: Border.all(
+                color: buttonModel.borderColor ?? Colors.transparent),
+            borderRadius:
+                BorderRadius.circular(buttonModel.borderRadius ?? 100)),
         child: buttonModel.child ??
             Center(
                 child: buttonModel.isLoading

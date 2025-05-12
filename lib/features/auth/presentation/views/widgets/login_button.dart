@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
       buttonModel: ButtonModel(
           buttonName: "Sign In",
           isLoading: auth.isLoading,
-          color: AppColors.primaryColor,
+          backgroundColor: AppColors.primaryColor,
           onTap: () => auth.add(LoginButtonEvent())),
     );
   }

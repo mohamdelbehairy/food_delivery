@@ -17,7 +17,7 @@ class ProfileAndSupportSection extends StatelessWidget {
             title: "Profile", items: profile.profileItems(context)),
         const SizedBox(height: 16),
         PofileTitleAndListViewSection(
-            title: "Support", items: profile.supportItems()),
+            title: "Support", items: profile.supportItems(context)),
       ],
     );
   }

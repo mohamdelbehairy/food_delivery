@@ -17,7 +17,7 @@ class RegisterButton extends StatelessWidget {
         buttonModel: ButtonModel(
             buttonName: "Register",
             isLoading: auth.isLoading,
-            color: AppColors.primaryColor,
+            backgroundColor: AppColors.primaryColor,
             onTap: () => auth.add(RegisterButtonEvent())));
   }
 }

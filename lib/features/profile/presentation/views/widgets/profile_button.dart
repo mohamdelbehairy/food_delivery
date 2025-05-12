@@ -17,7 +17,7 @@ class ProfileButton extends StatelessWidget {
         buttonModel: ButtonModel(
       onTap: () => showDialog(
           context: context, builder: (context) => ProfileSignOutShowDialog()),
-      border: Border.all(color: const Color(0xffD6D6D6)),
+      borderColor: const Color(0xffD6D6D6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -30,4 +30,3 @@ class ProfileButton extends StatelessWidget {
     ));
   }
 }
-

@@ -4,18 +4,21 @@ class ButtonModel {
   final String buttonName;
   final bool isLoading;
   final void Function()? onTap;
-  final Color? color;
-  final BoxBorder? border;
+  final Color? backgroundColor, borderColor;
   final Widget? child;
-  final double? height, width;
+  final double? height, width, borderRadius;
+  final EdgeInsetsGeometry? padding, margin;
 
   ButtonModel(
       {this.buttonName = "",
       this.isLoading = false,
       this.onTap,
-      this.color,
-      this.border,
+      this.backgroundColor,
+      this.borderColor,
       this.child,
       this.height,
-      this.width});
+      this.width,
+      this.borderRadius,
+      this.padding,
+      this.margin});
 }

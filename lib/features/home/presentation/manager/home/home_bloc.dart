@@ -9,6 +9,7 @@ import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../profile/data/model/gender_item_model.dart';
 import '../../../../profile/data/model/profile_item_model.dart';
+import '../../../../profile/presentation/views/help_center_view.dart';
 import '../../../../profile/presentation/views/personal_data_view.dart';
 import '../../../../profile/presentation/views/setting_view.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
@@ -95,18 +96,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     ];
   }
 
-  List<ProfileItemModel> supportItems() {
+  List<ProfileItemModel> supportItems(BuildContext context) {
     return [
       ProfileItemModel(
-          title: 'Help Center', leading: Assets.imagesHelpCenter, onTap: () {}),
+          title: 'Help Center',
+          leading: Assets.imagesHelpCenter,
+          onTap: () => Navigation.push(context, const HelpCenterView())),
       ProfileItemModel(
-          title: 'Request Account Deletion',
+          title: 'Delete Account',
           leading: Assets.imagesDeleteAccount,
           onTap: () {}),
       ProfileItemModel(
           title: 'Add another account',
           leading: Assets.imagesAddAnotherAccount,
-          onTap: () {}),
+          onTap: () => Helper.customSnackBar(context,
+              message: "This Feature is coming soon.")),
     ];
   }
 

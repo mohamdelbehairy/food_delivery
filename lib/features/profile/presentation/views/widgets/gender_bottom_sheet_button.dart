@@ -13,7 +13,7 @@ class GenderBottomSheetButton extends StatelessWidget {
     return CustomButton(
         buttonModel: ButtonModel(
             buttonName: "Select",
-            color: AppColors.primaryColor,
+            backgroundColor: AppColors.primaryColor,
             onTap: onTap));
   }
 }

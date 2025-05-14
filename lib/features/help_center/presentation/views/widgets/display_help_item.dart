@@ -5,8 +5,8 @@ import '../../../data/model/background_item_model.dart';
 import '../../../data/model/help_center_model.dart';
 import 'help_center_item_background.dart';
 
-class ListViewItem extends StatelessWidget {
-  const ListViewItem({super.key, required this.helpCenterModel});
+class DisplayHelpItem extends StatelessWidget {
+  const DisplayHelpItem({super.key, required this.helpCenterModel});
   final HelpCenterModel helpCenterModel;
 
   @override

@@ -11,6 +11,7 @@ class DeleteAccountViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deleteAccount = context.read<DeleteAccountCubit>();
     return BlocConsumer<DeleteAccountCubit, DeleteAccountState>(
       listener: (context, state) {
         if (state is DeleteAccountSuccess) {
@@ -19,11 +20,10 @@ class DeleteAccountViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (context.read<DeleteAccountCubit>().isLoading) {
+        if (deleteAccount.isLoading) {
           return Center(
-            child: LoadingAnimationIndicator(
-                size: 32, color: AppColors.primaryColor),
-          );
+              child: LoadingAnimationIndicator(
+                  size: 32, color: AppColors.primaryColor));
         }
         return const SizedBox();
       },

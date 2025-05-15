@@ -17,8 +17,8 @@ class ProfileUserImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(100)),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child:
-              child ?? Image.asset(Assets.imagesRectangle, fit: BoxFit.fill)),
+          child: child ??
+              Image.asset(Assets.imagesDefaultProfile, fit: BoxFit.fill)),
     );
   }
 }

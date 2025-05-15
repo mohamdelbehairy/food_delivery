@@ -38,6 +38,10 @@ class Assets {
   /// assets/images/chat.svg
   static const String imagesChat = "assets/images/chat.svg";
 
+  /// Assets for imagesDefaultProfile
+  /// assets/images/default_profile.jpg
+  static const String imagesDefaultProfile = "assets/images/default_profile.jpg";
+
   /// Assets for imagesDeleteAccount
   /// assets/images/delete_account.svg
   static const String imagesDeleteAccount = "assets/images/delete_account.svg";
@@ -89,10 +93,6 @@ class Assets {
   /// Assets for imagesProgressbutton
   /// assets/images/Progressbutton.png
   static const String imagesProgressbutton = "assets/images/Progressbutton.png";
-
-  /// Assets for imagesRectangle
-  /// assets/images/Rectangle.png
-  static const String imagesRectangle = "assets/images/Rectangle.png";
 
   /// Assets for imagesSellers
   /// assets/images/sellers.svg

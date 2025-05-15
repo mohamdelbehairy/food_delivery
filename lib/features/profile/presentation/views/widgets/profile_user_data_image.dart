@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/core/utils/assets.dart';
 
 import '../../../../../core/model/cached_network_model.dart';
 import '../../../../../core/widgets/custom_cached_network_image.dart';
@@ -11,9 +12,9 @@ class ProfileUserDataImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileUserImage(
-        child: userImage != null || userImage!.isNotEmpty
+        child: userImage != null && userImage!.isNotEmpty
             ? CustomCachedNetworkImage(
                 cachedNetworkModel: CachedNetworkModel(imageUrl: userImage!))
-            : null);
+            : Image.asset(Assets.imagesDefaultProfile, fit: BoxFit.fill));
   }
 }

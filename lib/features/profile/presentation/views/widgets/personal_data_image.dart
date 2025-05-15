@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/cached_network_model.dart';
+import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/widgets/custom_cached_network_image.dart';
 
 import '../../manager/personal_data/personal_data_bloc.dart';
@@ -15,8 +16,10 @@ class PersonalDataImage extends StatelessWidget {
     final image = context.read<PersonalDataBloc>();
     return ProfileUserImage(
         child: image.image == null
-            ? CustomCachedNetworkImage(
-                cachedNetworkModel: CachedNetworkModel(imageUrl: imageUrl!))
+            ? imageUrl != null
+                ? CustomCachedNetworkImage(
+                    cachedNetworkModel: CachedNetworkModel(imageUrl: imageUrl!))
+                : Image.asset(Assets.imagesDefaultProfile, fit: BoxFit.fill)
             : Image.file(image.image!, fit: BoxFit.cover));
   }
 }

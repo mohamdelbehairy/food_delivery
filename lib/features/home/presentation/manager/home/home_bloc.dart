@@ -12,6 +12,7 @@ import '../../../../profile/data/model/profile_item_model.dart';
 import '../../../../help_center/presentation/views/help_center_view.dart';
 import '../../../../profile/presentation/views/personal_data_view.dart';
 import '../../../../profile/presentation/views/setting_view.dart';
+import '../../../../profile/presentation/views/widgets/delete_account_show_dialog.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/bottom_nav_model.dart';
@@ -105,7 +106,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ProfileItemModel(
           title: 'Delete Account',
           leading: Assets.imagesDeleteAccount,
-          onTap: () {}),
+          onTap: () => showDialog(
+              context: context,
+              builder: (context) => DeleteAccountShowDialog())),
       ProfileItemModel(
           title: 'Add another account',
           leading: Assets.imagesAddAnotherAccount,
@@ -128,3 +131,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     return super.close();
   }
 }
+
+

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/button_model.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 import 'package:food_delivery/core/widgets/custom_button.dart';
-import 'package:food_delivery/features/auth/presentation/manager/auth/auth_event.dart';
 
-import '../../../../auth/presentation/manager/auth/auth_bloc.dart';
-
-class ProfileAlertDialogButtons extends StatelessWidget {
-  const ProfileAlertDialogButtons({super.key});
+class AlertDialogButtons extends StatelessWidget {
+  const AlertDialogButtons(
+      {super.key, required this.onTap, required this.buttonName});
+  final String buttonName;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.read<AuthBloc>();
     return Row(
       children: [
         CustomButton(
@@ -30,12 +28,11 @@ class ProfileAlertDialogButtons extends StatelessWidget {
         const SizedBox(width: 12),
         CustomButton(
             buttonModel: ButtonModel(
-          height: 48,
-          width: 130,
-          buttonName: "Log Out",
-          backgroundColor: AppColors.primaryColor,
-          onTap: () => auth.add(LogoutEvent()),
-        )),
+                height: 48,
+                width: 130,
+                buttonName: buttonName,
+                backgroundColor: AppColors.primaryColor,
+                onTap: onTap)),
       ],
     );
   }

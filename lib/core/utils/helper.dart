@@ -88,7 +88,7 @@ abstract class Helper {
   }
 
   static Future<Object?> showAlertWidget(BuildContext context,
-      {bool? isLogOut}) {
+      {bool? isLogOut, String? title}) {
     showGeneralDialog(
         context: context,
         pageBuilder: (_, __, ___) => Material(
@@ -108,7 +108,8 @@ abstract class Helper {
                           svgModel: SvgModel(image: Assets.imagesLoginSuccess)),
                       const SizedBox(height: 24),
                       Text(
-                          '${isLogOut == true ? "Log Out" : "Sign In"}\n Successful',
+                          title ??
+                              '${isLogOut == true ? "Log Out" : "Sign In"}\n Successful',
                           textAlign: TextAlign.center,
                           style: Styles.styleBoldUrbainst24),
                       const SizedBox(height: 16),

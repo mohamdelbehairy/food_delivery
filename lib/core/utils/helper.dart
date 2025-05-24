@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/core/model/svg_model.dart';
@@ -11,7 +12,6 @@ import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/custom_svg.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
-import 'package:food_delivery/core/utils/services/shared_pref_service.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +20,8 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import 'services/firebase_auth_service.dart';
 import 'services/firebase_firestore_service.dart';
+import 'services/firebase_storage_service.dart';
+import 'services/shared_pref_service.dart';
 import 'services/url_launcher_service.dart';
 
 abstract class Helper {
@@ -152,11 +154,17 @@ abstract class Helper {
     getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     getIt.registerLazySingleton<FirebaseFirestore>(
         () => FirebaseFirestore.instance);
+    getIt
+        .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
     getIt.registerSingleton<FirebaseAuthService>(
         FirebaseAuthService(getIt.get<FirebaseAuth>()));
+
     getIt.registerSingleton<FirebaseFirestoreService>(
         FirebaseFirestoreService(getIt.get<FirebaseFirestore>()));
+
+    getIt.registerSingleton<FirebaseStorageService>(
+        FirebaseStorageService(getIt.get<FirebaseStorage>()));
 
     getIt.registerSingleton<UrlLauncherService>(UrlLauncherService());
 

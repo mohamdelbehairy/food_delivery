@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
-import '../../features/user_data/data/repo/user_data_repo_impl.dart';
 import 'services/firebase_auth_service.dart';
+import 'services/firebase_firestore_service.dart';
 import 'services/url_launcher_service.dart';
 
 abstract class Helper {
@@ -149,12 +150,14 @@ abstract class Helper {
   static Future<void> setupLocator() async {
     // firebase
     getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+    getIt.registerLazySingleton<FirebaseFirestore>(
+        () => FirebaseFirestore.instance);
 
     getIt.registerSingleton<FirebaseAuthService>(
         FirebaseAuthService(getIt.get<FirebaseAuth>()));
+    getIt.registerSingleton<FirebaseFirestoreService>(
+        FirebaseFirestoreService(getIt.get<FirebaseFirestore>()));
 
-    // getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
-    getIt.registerSingleton<UserDataRepoImpl>(UserDataRepoImpl());
     getIt.registerSingleton<UrlLauncherService>(UrlLauncherService());
 
     // shared pref

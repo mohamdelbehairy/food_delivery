@@ -8,6 +8,7 @@ class ButtonModel {
   final Widget? child;
   final double? height, width, borderRadius;
   final EdgeInsetsGeometry? padding, margin;
+  final TextStyle? style;
 
   ButtonModel(
       {this.buttonName = "",
@@ -20,5 +21,6 @@ class ButtonModel {
       this.width,
       this.borderRadius,
       this.padding,
-      this.margin});
+      this.margin,
+      this.style});
 }

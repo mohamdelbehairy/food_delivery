@@ -14,7 +14,7 @@ import '../../../../profile/presentation/views/personal_data_view.dart';
 import '../../../../profile/presentation/views/profile_view.dart';
 import '../../../../profile/presentation/views/setting_view.dart';
 import '../../../../profile/presentation/views/widgets/delete_account_show_dialog.dart';
-import '../../../../user_data/data/model/user_data_model.dart';
+import '../../../../profile/data/model/user_data_model.dart';
 import '../../../data/model/bottom_nav_model.dart';
 
 part 'home_event.dart';

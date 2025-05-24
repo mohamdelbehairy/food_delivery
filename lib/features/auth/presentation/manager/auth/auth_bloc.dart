@@ -13,7 +13,7 @@ import '../../../../../core/utils/services/firebase_auth_service.dart';
 import '../../../../../core/utils/services/firebase_firestore_service.dart';
 import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../../../core/utils/services/url_launcher_service.dart';
-import '../../../../user_data/data/model/user_data_model.dart';
+import '../../../../profile/data/model/user_data_model.dart';
 import '../../../data/model/provider_item_model.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';

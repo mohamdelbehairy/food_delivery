@@ -2,29 +2,39 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:food_delivery/core/utils/helper.dart';
-import 'package:food_delivery/core/utils/secret_key.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
-import 'auth_repo.dart';
+import '../helper.dart';
+import '../secret_key.dart';
 
-class AuthRepoImpl extends AuthRepo {
-  @override
-  Future<void> registerEmail(String email, String password) async {
-    await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
+class FirebaseAuthService {
+  final FirebaseAuth _firebaseAuth;
+
+  FirebaseAuthService(this._firebaseAuth);
+
+  Future<void> createUserWithEmail(String email, String password) async {
+    await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
   }
 
-  @override
-  Future<void> loginEmail(String email, String password) async {
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+  Future<void> loginWithEmail(String email, String password) async {
+    await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
   }
 
-  @override
+  Future<void> forgotPassword(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> logOut() async {
+    await _firebaseAuth.signOut();
+    await GoogleSignIn().signOut();
+  }
+
   Future<UserCredential?> loginUsingGoogle() async {
     UserCredential? userCredential;
+
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
@@ -32,17 +42,16 @@ class AuthRepoImpl extends AuthRepo {
     if (googleAuth != null) {
       final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+      userCredential = await _firebaseAuth.signInWithCredential(credential);
     }
 
     return userCredential;
   }
 
-  @override
   Future<UserCredential?> loginUsingFacebook() async {
     final rawNonce = Helper.generateNonce();
     final nonce = Helper.sha256ofString(rawNonce);
+
     UserCredential? userCredential;
     final LoginResult loginResult =
         await FacebookAuth.instance.login(nonce: nonce);
@@ -61,15 +70,14 @@ class AuthRepoImpl extends AuthRepo {
             loginResult.accessToken!.tokenString);
       }
 
-      userCredential = await FirebaseAuth.instance
-          .signInWithCredential(facebookAuthCredential);
+      userCredential =
+          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
     }
 
     return userCredential;
   }
 
-  @override
-  Future<UserCredential?> loginUsingTwitter() async {
+    Future<UserCredential?> loginUsingTwitter() async {
     UserCredential? userCredential;
     final twitterLogin = TwitterLogin(
         apiKey: SecretKey.apiKey,
@@ -88,16 +96,5 @@ class AuthRepoImpl extends AuthRepo {
     }
 
     return userCredential;
-  }
-
-  @override
-  Future<void> forgotPassword(String email) async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-  }
-
-  @override
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
   }
 }

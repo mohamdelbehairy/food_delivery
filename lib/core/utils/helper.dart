@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/core/model/svg_model.dart';
@@ -12,10 +13,10 @@ import 'package:food_delivery/core/utils/navigation.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/user_data/data/repo/user_data_repo_impl.dart';
+import 'services/firebase_auth_service.dart';
 import 'services/url_launcher_service.dart';
 
 abstract class Helper {
@@ -144,7 +145,12 @@ abstract class Helper {
   static final getIt = GetIt.instance;
 
   static void setupLocator() {
-    getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
+    getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+
+    getIt.registerSingleton<FirebaseAuthService>(
+        FirebaseAuthService(getIt.get<FirebaseAuth>()));
+
+    // getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
     getIt.registerSingleton<UserDataRepoImpl>(UserDataRepoImpl());
     getIt.registerSingleton<UrlLauncherService>(UrlLauncherService());
   }

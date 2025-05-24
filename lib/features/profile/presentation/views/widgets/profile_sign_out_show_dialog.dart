@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/alert_dialog_model.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 
+import '../../../../../core/utils/services/firebase_auth_service.dart';
 import '../../../../../core/widgets/custom_alert_dialog.dart';
-import '../../../../auth/data/repo/auth_repo_impl.dart';
 import '../../../../auth/presentation/manager/auth/auth_bloc.dart';
 import '../../../../auth/presentation/manager/auth/auth_event.dart';
 import '../../../../auth/presentation/manager/auth/auth_state.dart';
@@ -16,7 +16,7 @@ class ProfileSignOutShowDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(Helper.getIt.get<AuthRepoImpl>(),
+      create: (context) => AuthBloc(Helper.getIt.get<FirebaseAuthService>(),
           Helper.getIt.get<UserDataRepoImpl>()),
       child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {

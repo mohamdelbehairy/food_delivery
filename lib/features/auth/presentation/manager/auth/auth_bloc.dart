@@ -22,8 +22,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // final AuthRepo _authRepo;
   final FirebaseAuthService _firebaseAuthService;
   final UserDataRepo _userDataRepo;
+  final SharedPrefService _sharedPrefService;
   final UrlLauncherService _launcherService = Helper.getIt.get();
-  AuthBloc(this._firebaseAuthService, this._userDataRepo)
+  AuthBloc(
+      this._firebaseAuthService, this._userDataRepo, this._sharedPrefService)
       : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
@@ -367,7 +369,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ];
   }
 
-  final SharedPrefService _sharedPrefService = SharedPrefService();
   void loginDispose(BuildContext context, {bool? isLogin}) async {
     Helper.showAlertWidget(context);
 

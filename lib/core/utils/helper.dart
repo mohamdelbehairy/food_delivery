@@ -10,8 +10,10 @@ import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/custom_svg.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
+import 'package:food_delivery/core/utils/services/shared_pref_service.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
@@ -144,7 +146,8 @@ abstract class Helper {
 
   static final getIt = GetIt.instance;
 
-  static void setupLocator() {
+  static Future<void> setupLocator() async {
+    // firebase
     getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
     getIt.registerSingleton<FirebaseAuthService>(
@@ -153,5 +156,13 @@ abstract class Helper {
     // getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
     getIt.registerSingleton<UserDataRepoImpl>(UserDataRepoImpl());
     getIt.registerSingleton<UrlLauncherService>(UrlLauncherService());
+
+    // shared pref
+    getIt.registerLazySingletonAsync<SharedPreferences>(
+        () async => await SharedPreferences.getInstance());
+    await getIt.isReady<SharedPreferences>();
+
+    getIt.registerSingleton<SharedPrefService>(
+        SharedPrefService(getIt.get<SharedPreferences>()));
   }
 }

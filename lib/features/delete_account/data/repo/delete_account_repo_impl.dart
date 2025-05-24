@@ -7,7 +7,9 @@ import '../../../../core/utils/services/shared_pref_service.dart';
 import 'delete_account_repo.dart';
 
 class DeleteAccountRepoImpl extends DeleteAccountRepo {
-  final SharedPrefService _sharedPrefService = SharedPrefService();
+  final SharedPrefService _sharedPrefService;
+
+  DeleteAccountRepoImpl(this._sharedPrefService);
   @override
   Future<void> deleteAccount() async {
     final userID = _sharedPrefService.getString(Constants.userID);

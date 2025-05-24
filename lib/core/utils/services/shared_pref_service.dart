@@ -1,10 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefService {
-  static SharedPreferences? _prefs;
-  static Future<void> init() async {
-    _prefs ??= await SharedPreferences.getInstance();
-  }
+  final SharedPreferences? _prefs;
+
+  SharedPrefService(this._prefs);
 
   Future<void> setString({required String key, required String value}) async =>
       _prefs?.setString(key, value);

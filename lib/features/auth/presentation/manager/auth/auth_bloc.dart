@@ -8,21 +8,23 @@ import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 
+import '../../../../../core/utils/services/firebase_auth_service.dart';
 import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../../../core/utils/services/url_launcher_service.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
 import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/provider_item_model.dart';
 import '../../../../../core/model/text_field_model.dart';
-import '../../../data/repo/auth_repo.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepo _authRepo;
+  // final AuthRepo _authRepo;
+  final FirebaseAuthService _firebaseAuthService;
   final UserDataRepo _userDataRepo;
   final UrlLauncherService _launcherService = Helper.getIt.get();
-  AuthBloc(this._authRepo, this._userDataRepo) : super(AuthInitial()) {
+  AuthBloc(this._firebaseAuthService, this._userDataRepo)
+      : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
       if (event is LoginVisbleEvent) {
@@ -45,8 +47,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           loginKey.currentState!.save();
           isLoading = true;
           emit(AuthLoading());
-          await _authRepo
-              .loginEmail(
+          await _firebaseAuthService
+              .loginWithEmail(
                   _loginEmailController.text, _loginPasswordController.text)
               .then((value) {
             isLoading = false;
@@ -71,8 +73,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (privacyPolicy) {
             isLoading = true;
             emit(AuthLoading());
-            await _authRepo
-                .registerEmail(_registerEmailController.text,
+            await _firebaseAuthService
+                .createUserWithEmail(_registerEmailController.text,
                     _registerPasswordController.text)
                 .then((value) async {
               await _userDataRepo.addUserData(UserDataModel(
@@ -99,7 +101,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // social auth events
       if (event is LoginGoogleEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingGoogle().then((value) async {
+        await _firebaseAuthService.loginUsingGoogle().then((value) async {
           if (value != null) {
             if (!await _userDataRepo.isUserExist(value.user!.uid)) {
               await _userDataRepo.addUserData(UserDataModel(
@@ -127,7 +129,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is LoginFacebookEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingFacebook().then((value) async {
+        await _firebaseAuthService.loginUsingFacebook().then((value) async {
           if (value != null) {
             if (!await _userDataRepo.isUserExist(value.user!.uid)) {
               await _userDataRepo.addUserData(UserDataModel(
@@ -156,7 +158,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is LoginTwitterEvent) {
         emit(AuthLoading());
-        await _authRepo.loginUsingTwitter().then((value) async {
+        await _firebaseAuthService.loginUsingTwitter().then((value) async {
           if (value != null) {
             if (!await _userDataRepo.isUserExist(value.user!.uid)) {
               await _userDataRepo.addUserData(UserDataModel(
@@ -188,7 +190,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           forgotPasswordKey.currentState!.save();
           isLoading = true;
           emit(AuthLoading());
-          await _authRepo
+          await _firebaseAuthService
               .forgotPassword(forgotPasswordController.text)
               .then((value) {
             isLoading = false;
@@ -204,7 +206,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // logout events
       if (event is LogoutEvent) {
         emit(AuthLoading());
-        await _authRepo.logOut().then((value) async {
+        await _firebaseAuthService.logOut().then((value) async {
           await _sharedPrefService.remove(Constants.userID);
           emit(LogoutSuccess());
         }).catchError((error) {

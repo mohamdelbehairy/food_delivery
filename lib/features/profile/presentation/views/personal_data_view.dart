@@ -4,8 +4,8 @@ import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../../../core/utils/services/firebase_firestore_service.dart';
 import '../../../../core/utils/services/firebase_storage_service.dart';
+import '../../../../core/utils/services/image_picker_service.dart';
 import '../../data/model/user_data_model.dart';
-import '../../data/repo/profile_repo_impl.dart';
 import '../manager/personal_data/personal_data_bloc.dart';
 import '../../../../core/widgets/custom_profile_app_bar.dart';
 import 'widgets/personal_data_view_body.dart';
@@ -18,9 +18,9 @@ class PersonalDataView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => PersonalDataBloc(
-            ProfileRepoImpl(),
             Helper.getIt.get<FirebaseFirestoreService>(),
-            Helper.getIt.get<FirebaseStorageService>())
+            Helper.getIt.get<FirebaseStorageService>(),
+            ImagePickerService())
           ..initTextField(context, userDataModel),
         child: Scaffold(
             backgroundColor: Colors.white,

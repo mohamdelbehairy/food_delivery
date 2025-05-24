@@ -5,16 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/core/model/button_model.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
-import 'package:food_delivery/core/utils/services/firebase_storage_service.dart';
 import 'package:food_delivery/core/utils/styles.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/model/text_field_model.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/services/firebase_firestore_service.dart';
+import '../../../../../core/utils/services/firebase_storage_service.dart';
+import '../../../../../core/utils/services/image_picker_service.dart';
 import '../../../../home/presentation/manager/home/home_bloc.dart';
 import '../../../data/model/user_data_model.dart';
-import '../../../data/repo/profile_repo.dart';
 import '../../views/widgets/gender_bottom_sheet.dart';
 import '../../views/widgets/personal_data_pick_date.dart';
 
@@ -22,17 +22,16 @@ part 'personal_data_event.dart';
 part 'personal_data_state.dart';
 
 class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
-  final ProfileRepo _profileRepo;
-
   final FirebaseFirestoreService _firebaseFirestoreService;
   final FirebaseStorageService _firebaseStorageService;
+  final ImagePickerService _imagePickerService;
 
-  PersonalDataBloc(this._profileRepo, this._firebaseFirestoreService,
-      this._firebaseStorageService)
+  PersonalDataBloc(this._firebaseFirestoreService, this._firebaseStorageService,
+      this._imagePickerService)
       : super(PersonalDataInitial()) {
     on<PersonalDataEvent>((event, emit) async {
       if (event is PickImageEvent) {
-        image = await _profileRepo.pickImage();
+        image = await _imagePickerService.pickImage();
         emit(PickImageSuccess());
       }
       if (event is UpdatePersonalDataEvent) {

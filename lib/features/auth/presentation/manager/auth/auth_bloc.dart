@@ -8,24 +8,24 @@ import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 
+import '../../../../../core/model/text_field_model.dart';
 import '../../../../../core/utils/services/firebase_auth_service.dart';
+import '../../../../../core/utils/services/firebase_firestore_service.dart';
 import '../../../../../core/utils/services/shared_pref_service.dart';
 import '../../../../../core/utils/services/url_launcher_service.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
-import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/model/provider_item_model.dart';
-import '../../../../../core/model/text_field_model.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  // final AuthRepo _authRepo;
   final FirebaseAuthService _firebaseAuthService;
-  final UserDataRepo _userDataRepo;
+  final FirebaseFirestoreService _firebaseFirestoreService;
   final SharedPrefService _sharedPrefService;
-  final UrlLauncherService _launcherService = Helper.getIt.get();
-  AuthBloc(
-      this._firebaseAuthService, this._userDataRepo, this._sharedPrefService)
+  final UrlLauncherService _launcherService;
+
+  AuthBloc(this._firebaseAuthService, this._firebaseFirestoreService,
+      this._sharedPrefService, this._launcherService)
       : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       // email auth events
@@ -79,10 +79,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .createUserWithEmail(_registerEmailController.text,
                     _registerPasswordController.text)
                 .then((value) async {
-              await _userDataRepo.addUserData(UserDataModel(
+              final data = UserDataModel(
                   userName: _registerUserNameController.text,
-                  userID: FirebaseAuth.instance.currentUser!.uid,
-                  userEmail: _registerEmailController.text));
+                  userID: Helper.getIt.get<FirebaseAuth>().currentUser!.uid,
+                  userEmail: _registerEmailController.text);
+              await _firebaseFirestoreService.addData(
+                  collectionName: Constants.userCollection,
+                  docID: data.userID,
+                  data: data.toJson());
               isLoading = false;
               emit(RegisterSuccess());
             }).catchError((error) {
@@ -105,12 +109,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _firebaseAuthService.loginUsingGoogle().then((value) async {
           if (value != null) {
-            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
-              await _userDataRepo.addUserData(UserDataModel(
-                  userName: value.user?.displayName ?? "",
-                  userID: value.user?.uid ?? "",
-                  userEmail: value.user?.email ?? "",
-                  userImage: value.user?.photoURL ?? ""));
+            if (!await _firebaseFirestoreService.isDataExist(
+                collectionName: Constants.userCollection,
+                docID: value.user!.uid)) {
+              await _firebaseFirestoreService.addData(
+                  collectionName: Constants.userCollection,
+                  docID: value.user?.uid ?? "",
+                  data: UserDataModel(
+                          userName: value.user?.displayName ?? "",
+                          userID: value.user?.uid ?? "",
+                          userEmail: value.user?.email ?? "",
+                          userImage: value.user?.photoURL ?? "")
+                      .toJson());
             }
             emit(LoginSuccess());
           } else {
@@ -133,12 +143,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _firebaseAuthService.loginUsingFacebook().then((value) async {
           if (value != null) {
-            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
-              await _userDataRepo.addUserData(UserDataModel(
-                  userName: value.user?.displayName ?? "",
-                  userID: value.user?.uid ?? "",
-                  userEmail: value.user?.email ?? "",
-                  userImage: value.user?.photoURL ?? ""));
+            if (!await _firebaseFirestoreService.isDataExist(
+                collectionName: Constants.userCollection,
+                docID: value.user!.uid)) {
+              await _firebaseFirestoreService.addData(
+                  collectionName: Constants.userCollection,
+                  docID: value.user?.uid ?? "",
+                  data: UserDataModel(
+                          userName: value.user?.displayName ?? "",
+                          userID: value.user?.uid ?? "",
+                          userEmail: value.user?.email ?? "",
+                          userImage: value.user?.photoURL ?? "")
+                      .toJson());
             }
 
             emit(LoginSuccess());
@@ -162,12 +178,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         await _firebaseAuthService.loginUsingTwitter().then((value) async {
           if (value != null) {
-            if (!await _userDataRepo.isUserExist(value.user!.uid)) {
-              await _userDataRepo.addUserData(UserDataModel(
-                  userName: value.user?.displayName ?? "",
-                  userID: value.user?.uid ?? "",
-                  userEmail: value.user?.email ?? "",
-                  userImage: value.user?.photoURL ?? ""));
+            if (!await _firebaseFirestoreService.isDataExist(
+                collectionName: Constants.userCollection,
+                docID: value.user!.uid)) {
+              await _firebaseFirestoreService.addData(
+                  collectionName: Constants.userCollection,
+                  docID: value.user?.uid ?? "",
+                  data: UserDataModel(
+                          userName: value.user?.displayName ?? "",
+                          userID: value.user?.uid ?? "",
+                          userEmail: value.user?.email ?? "",
+                          userImage: value.user?.photoURL ?? "")
+                      .toJson());
             }
             emit(LoginSuccess());
           } else {

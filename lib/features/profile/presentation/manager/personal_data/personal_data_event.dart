@@ -4,4 +4,6 @@ sealed class PersonalDataEvent {}
 
 class PickImageEvent extends PersonalDataEvent {}
 
-class SavePersonalDataEvent extends PersonalDataEvent {}
+class UpdatePersonalDataEvent extends PersonalDataEvent {}
+
+class CancleChangesEvent extends PersonalDataEvent {}

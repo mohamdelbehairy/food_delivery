@@ -4,12 +4,13 @@ import 'package:food_delivery/core/model/alert_dialog_model.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 
 import '../../../../../core/utils/services/firebase_auth_service.dart';
+import '../../../../../core/utils/services/firebase_firestore_service.dart';
 import '../../../../../core/utils/services/shared_pref_service.dart';
+import '../../../../../core/utils/services/url_launcher_service.dart';
 import '../../../../../core/widgets/custom_alert_dialog.dart';
 import '../../../../auth/presentation/manager/auth/auth_bloc.dart';
 import '../../../../auth/presentation/manager/auth/auth_event.dart';
 import '../../../../auth/presentation/manager/auth/auth_state.dart';
-import '../../../../user_data/data/repo/user_data_repo_impl.dart';
 
 class ProfileSignOutShowDialog extends StatelessWidget {
   const ProfileSignOutShowDialog({super.key});
@@ -19,8 +20,9 @@ class ProfileSignOutShowDialog extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(
           Helper.getIt.get<FirebaseAuthService>(),
-          Helper.getIt.get<UserDataRepoImpl>(),
-          Helper.getIt.get<SharedPrefService>()),
+          Helper.getIt.get<FirebaseFirestoreService>(),
+          Helper.getIt.get<SharedPrefService>(),
+          Helper.getIt.get<UrlLauncherService>()),
       child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is LogoutSuccess) {

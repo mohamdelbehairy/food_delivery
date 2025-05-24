@@ -29,7 +29,8 @@ class CustomButton extends StatelessWidget {
             Center(
                 child: buttonModel.isLoading
                     ? const LoadingAnimationIndicator()
-                    : Text(buttonModel.buttonName, style: Styles.semiBold14)),
+                    : Text(buttonModel.buttonName,
+                        style: buttonModel.style ?? Styles.semiBold14)),
       ),
     );
   }

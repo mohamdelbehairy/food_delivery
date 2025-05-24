@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery/core/model/button_model.dart';
+import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
+import 'package:food_delivery/core/utils/services/firebase_firestore_service.dart';
+import 'package:food_delivery/core/utils/styles.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/model/text_field_model.dart';
+import '../../../../../core/utils/colors.dart';
 import '../../../../home/presentation/manager/home/home_bloc.dart';
 import '../../../../user_data/data/model/user_data_model.dart';
-import '../../../../user_data/data/repo/user_data_repo.dart';
 import '../../../data/repo/profile_repo.dart';
 import '../../views/widgets/gender_bottom_sheet.dart';
 import '../../views/widgets/personal_data_pick_date.dart';
@@ -18,16 +22,17 @@ part 'personal_data_state.dart';
 
 class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
   final ProfileRepo _profileRepo;
-  final UserDataRepo _dataRepo;
 
-  PersonalDataBloc(this._profileRepo, this._dataRepo)
+  final FirebaseFirestoreService _firebaseFirestoreService;
+
+  PersonalDataBloc(this._profileRepo, this._firebaseFirestoreService)
       : super(PersonalDataInitial()) {
     on<PersonalDataEvent>((event, emit) async {
       if (event is PickImageEvent) {
         image = await _profileRepo.pickImage();
         emit(PickImageSuccess());
       }
-      if (event is SavePersonalDataEvent) {
+      if (event is UpdatePersonalDataEvent) {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
 
@@ -58,28 +63,55 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
             isLoading = true;
             emit(PersonalDataLoading());
 
-            if (isNameChanged || isDateChanged || isGenderChanged) {
-              final userDataModel = _userDataModel!.copyWith(
-                userName: _fullNameController!.text.trim(),
-                gender: _genderController!.text.trim(),
-                dateOfBirth: _dateOfBirthController!.text.trim(),
-              );
-              await _dataRepo.updateUserData(userDataModel);
-            }
+            if (isNameChanged ||
+                isDateChanged ||
+                isGenderChanged ||
+                isImageChanged) {
+              String? imageUrl;
+              if (isImageChanged) {
+                imageUrl = await _profileRepo.storgeImage(image!);
+              }
 
-            if (isImageChanged) {
-              final imageUrl = await _profileRepo.storgeImage(image!);
-              final userDataModel = _userDataModel!.copyWith(
+              final userData = _userDataModel!.copyWith(
                   imageFile: image?.path,
                   userImage: imageUrl,
                   userName: _fullNameController!.text.trim(),
                   gender: _genderController!.text.trim(),
                   dateOfBirth: _dateOfBirthController!.text.trim());
-              await _dataRepo.updateUserData(userDataModel);
-            }
+              await _firebaseFirestoreService.updateData(
+                  collectionName: Constants.userCollection,
+                  docID: userData.userID,
+                  data: userData.toJson());
 
-            emit(UpdateUserDataSuccess());
+              emit(UpdateUserDataSuccess());
+            }
           }
+        }
+      }
+
+      if (event is CancleChangesEvent) {
+        final isFullNameChanged = _fullNameController!.text.isNotEmpty &&
+            _userDataModel?.userName != _fullNameController!.text.trim();
+        final isDateChanged = _dateOfBirthController!.text.isNotEmpty &&
+            _userDataModel?.dateOfBirth != _dateOfBirthController!.text.trim();
+        final isGenderChanged = _genderController!.text.isNotEmpty &&
+            _userDataModel?.gender != _genderController!.text.trim();
+
+        final isImageChanged = image != null;
+
+        if (isFullNameChanged ||
+            isDateChanged ||
+            isGenderChanged ||
+            isImageChanged) {
+          if (isFullNameChanged || isDateChanged || isGenderChanged) {
+            _fullNameController!.text = _userDataModel!.userName;
+            _dateOfBirthController!.text = _userDataModel!.dateOfBirth!;
+            _genderController!.text = _userDataModel!.gender!;
+          }
+          if (isImageChanged) {
+            image = null;
+          }
+          emit(CancleChanges());
         }
       }
     });
@@ -183,6 +215,22 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
           readOnly: true,
           controller: _emailController,
           hintText: "example@gmail.com"),
+    ];
+  }
+
+  List<ButtonModel> buttonList() {
+    return [
+      ButtonModel(
+          buttonName: "Update Changes",
+          backgroundColor: AppColors.primaryColor,
+          isLoading: isLoading,
+          onTap: () => add(UpdatePersonalDataEvent())),
+      ButtonModel(
+          buttonName: "Cancel Changes",
+          backgroundColor: Colors.white,
+          borderColor: AppColors.primaryColor,
+          style: Styles.semiBold14.copyWith(color: const Color(0xff101010)),
+          onTap: () => add(CancleChangesEvent())),
     ];
   }
 

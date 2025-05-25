@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_delivery/core/utils/constants.dart';
 
 class FirebaseFirestoreService {
   final FirebaseFirestore _firebaseFirestore;
@@ -15,7 +16,15 @@ class FirebaseFirestoreService {
   void getData(
       {required String collectionName,
       required Function(QuerySnapshot<Map<String, dynamic>>)? onData}) {
-    _firebaseFirestore.collection(collectionName).snapshots().listen(onData);
+    final collectionRef = _firebaseFirestore.collection(collectionName);
+    if (collectionName == Constants.productCollection) {
+      collectionRef
+          .orderBy("createdAt", descending: true)
+          .snapshots()
+          .listen(onData);
+    } else {
+      collectionRef.snapshots().listen(onData);
+    }
   }
 
   Future<bool> isDataExist(

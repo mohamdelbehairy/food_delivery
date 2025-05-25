@@ -26,6 +26,10 @@ class Assets {
   /// assets/images/boarding3.png
   static const String imagesBoarding3 = "assets/images/boarding3.png";
 
+  /// Assets for imagesBurger
+  /// assets/images/burger.png
+  static const String imagesBurger = "assets/images/burger.png";
+
   /// Assets for imagesBuyers
   /// assets/images/buyers.svg
   static const String imagesBuyers = "assets/images/buyers.svg";
@@ -49,6 +53,10 @@ class Assets {
   /// Assets for imagesDone
   /// assets/images/done.svg
   static const String imagesDone = "assets/images/done.svg";
+
+  /// Assets for imagesDrink
+  /// assets/images/drink.png
+  static const String imagesDrink = "assets/images/drink.png";
 
   /// Assets for imagesExtraCard
   /// assets/images/extra_card.svg
@@ -98,6 +106,10 @@ class Assets {
   /// assets/images/personal_data.svg
   static const String imagesPersonalData = "assets/images/personal_data.svg";
 
+  /// Assets for imagesPizza
+  /// assets/images/pizza.png
+  static const String imagesPizza = "assets/images/pizza.png";
+
   /// Assets for imagesProfile
   /// assets/images/profile.svg
   static const String imagesProfile = "assets/images/profile.svg";
@@ -117,6 +129,10 @@ class Assets {
   /// Assets for imagesSettings
   /// assets/images/settings.svg
   static const String imagesSettings = "assets/images/settings.svg";
+
+  /// Assets for imagesTaco
+  /// assets/images/taco.png
+  static const String imagesTaco = "assets/images/taco.png";
 
   /// Assets for imagesTwitter
   /// assets/images/twitter.svg

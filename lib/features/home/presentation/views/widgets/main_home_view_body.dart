@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/assets.dart';
-import 'main_home_header_location.dart';
-import 'main_home_header_search_and_notification.dart';
-import 'main_home_header_text.dart';
+import 'main_home_view_category_section.dart';
+import 'main_home_view_grid_view.dart';
+import 'main_home_view_header.dart';
 
 class MainHomeViewBody extends StatelessWidget {
   const MainHomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 24,
       children: [
-        Stack(
-          children: [
-            Image.asset(Assets.imagesHomeHeader),
-            const MainHomeHeaderLocation(),
-            const MainHomeHeaderSearchAndNotificaton(),
-            const MainHomeHeaderText(),
-          ],
-        ),
+        MainHomeViewHeader(),
+        MainHomeViewCategorySection(),
+        MainHomeViewGridView()
       ],
     );
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/utils/colors.dart';
 
 abstract class Styles {
-  // reqular
-  static const reqular14 = TextStyle(
+  // regular
+  static const regular14 = TextStyle(
       fontSize: 14,
       fontFamily: "inter",
       color: Colors.white,
@@ -57,6 +57,12 @@ abstract class Styles {
       fontSize: 22,
       fontFamily: "inter",
       color: Color(0xff101010),
+      fontWeight: FontWeight.w600);
+
+  static const semiBold32 = TextStyle(
+      fontSize: 32,
+      fontFamily: "inter",
+      color: Colors.white,
       fontWeight: FontWeight.w600);
 
   // urbainst font

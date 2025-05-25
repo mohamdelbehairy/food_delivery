@@ -28,7 +28,7 @@ class BoardingHeaderWidget extends StatelessWidget {
                     ? "Explore a world of flavors tailored\n just for you. One tap, and your next favorite meal is on the way!"
                     : "From street bites to fine dining – discover dishes that hit the spot every single time!",
             textAlign: TextAlign.center,
-            style: Styles.reqular14),
+            style: Styles.regular14),
       ],
     );
   }

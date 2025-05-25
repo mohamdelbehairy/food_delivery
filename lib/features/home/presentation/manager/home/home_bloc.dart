@@ -16,6 +16,7 @@ import '../../../../profile/presentation/views/setting_view.dart';
 import '../../../../profile/presentation/views/widgets/delete_account_show_dialog.dart';
 import '../../../../profile/data/model/user_data_model.dart';
 import '../../../data/model/bottom_nav_model.dart';
+import '../../views/main_home_view.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -71,10 +72,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ];
 
   List<Widget> views = const [
+    MainHomeView(),
     Scaffold(),
     Scaffold(),
-    Scaffold(),
-    ProfileView(),
+    ProfileView()
   ];
 
   // profile build items

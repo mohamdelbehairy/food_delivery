@@ -21,7 +21,7 @@ class ProfileUserData extends StatelessWidget {
             const SizedBox(height: 4),
             Text(userData.userDataModel!.userEmail,
                 style:
-                    Styles.reqular14.copyWith(color: const Color(0xff878787))),
+                    Styles.regular14.copyWith(color: const Color(0xff878787))),
           ],
         );
       },

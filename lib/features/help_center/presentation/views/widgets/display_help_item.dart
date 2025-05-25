@@ -19,7 +19,7 @@ class DisplayHelpItem extends StatelessWidget {
             title: Text(helpCenterModel.title, style: Styles.semiBold16),
             subtitle: Text(helpCenterModel.subTitle,
                 style:
-                    Styles.reqular14.copyWith(color: const Color(0xff878787))),
+                    Styles.regular14.copyWith(color: const Color(0xff878787))),
           )),
     );
   }

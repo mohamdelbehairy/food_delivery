@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/utils/colors.dart';
+import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../../core/utils/styles.dart';
+import '../all_products_view.dart';
 
 class MainHomeCategoryHeader extends StatelessWidget {
   const MainHomeCategoryHeader({super.key});
@@ -14,8 +16,11 @@ class MainHomeCategoryHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text("Find by Category", style: Styles.semiBold16),
-          Text("See All",
-              style: Styles.medium14.copyWith(color: AppColors.primaryColor))
+          GestureDetector(
+            onTap: () => Navigation.push(context, const AllProductsView()),
+            child: Text("See All",
+                style: Styles.medium14.copyWith(color: AppColors.primaryColor)),
+          )
         ],
       ),
     );

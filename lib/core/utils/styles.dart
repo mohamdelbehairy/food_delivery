@@ -5,71 +5,85 @@ abstract class Styles {
   // regular
   static const regular14 = TextStyle(
       fontSize: 14,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Colors.white,
       fontWeight: FontWeight.normal);
 
   // medium
   static const medium12 = TextStyle(
       fontSize: 12,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Color(0xff101010),
       fontWeight: FontWeight.w500);
 
   static const medium14 = TextStyle(
       fontSize: 14,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Color(0xff101010),
       fontWeight: FontWeight.w500);
 
   static const medium10 = TextStyle(
       fontSize: 10,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: AppColors.primaryColor,
       fontWeight: FontWeight.w500);
 
   static const medium16 = TextStyle(
       fontSize: 16,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Color(0xff101010),
       fontWeight: FontWeight.w500);
+
+  static const mediumItalic14 = TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      fontStyle: FontStyle.italic,
+      fontFamily: "PlusJakartaSans",
+      color: Color(0xff878787));
 
   // semiBold
   static const semiBold28 = TextStyle(
       fontSize: 28,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
   static const semiBold14 = TextStyle(
       fontSize: 14,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
   static const semiBold12 = TextStyle(
       fontSize: 12,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
   static const semiBold16 = TextStyle(
       fontSize: 16,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Color(0xff101010),
       fontWeight: FontWeight.w600);
 
   static const semiBold22 = TextStyle(
       fontSize: 22,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Color(0xff101010),
       fontWeight: FontWeight.w600);
 
   static const semiBold32 = TextStyle(
       fontSize: 32,
-      fontFamily: "inter",
+      fontFamily: "PlusJakartaSans",
       color: Colors.white,
       fontWeight: FontWeight.w600);
+
+  // bold
+  static const bold16 = TextStyle(
+      fontSize: 16,
+      fontFamily: "PlusJakartaSans",
+      color: AppColors.primaryColor,
+      fontWeight: FontWeight.w700);
 
   // urbainst font
   static TextStyle styleBoldUrbainst24 = TextStyle(

@@ -10,7 +10,7 @@ class MainHomeHeaderText extends StatelessWidget {
     return Positioned(
       left: 24,
       bottom: 24,
-      child: Text("Manage the best\nfood for your users",
+      child: Text("Provide the best\nfood for you",
           style: Styles.semiBold32),
     );
   }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-import '../../../../../core/model/product_data_model.dart';
 import '../../manager/home/home_bloc.dart';
 import 'main_home_grid_view_item.dart';
 import 'no_products_widget.dart';
 
 class MainHomeViewGridView extends StatelessWidget {
-  const MainHomeViewGridView({super.key, this.productsList});
-  final List<ProductDataModel>? productsList;
+  const MainHomeViewGridView({super.key, this.isAllProducts = false});
+  final bool isAllProducts;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +20,12 @@ class MainHomeViewGridView extends StatelessWidget {
         }
         return Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.only(
+                left: 24, right: 24, top: isAllProducts ? 24 : 0),
             child: GridView.builder(
-                itemCount: productsList?.length ?? products.productsList.length,
+                itemCount: isAllProducts
+                    ? products.allProductsList.length
+                    : products.productsList.length,
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -33,12 +34,12 @@ class MainHomeViewGridView extends StatelessWidget {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16),
                 itemBuilder: (context, index) => MainHomeGridViewItem(
-                    productData:
-                        productsList?[index] ?? products.productsList[index])),
+                    productData: isAllProducts
+                        ? products.allProductsList[index]
+                        : products.productsList[index])),
           ),
         );
       },
     );
   }
 }
-

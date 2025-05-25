@@ -80,13 +80,18 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: inter
+    - family: PlusJakartaSans
       fonts:
-        - asset: assets/fonts/Inter-Regular.otf
-        - asset: assets/fonts/Inter-Medium.otf
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+        - asset: assets/fonts/PlusJakartaSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Inter-SemiBold.otf
+        - asset: assets/fonts/PlusJakartaSans-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
           weight: 600
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+          weight: 700
 
     - family: Urbanist
       fonts:

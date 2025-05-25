@@ -146,7 +146,7 @@ class PersonalDataBloc extends Bloc<PersonalDataEvent, PersonalDataState> {
     return [
       TextFieldModel(
         header: "Full Name",
-        hintText: "Full Name",
+        hintText: "Type something longer here...",
         controller: _fullNameController,
         validator: (value) {
           if (value == null || value.isEmpty) {

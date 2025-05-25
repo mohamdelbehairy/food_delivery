@@ -31,7 +31,7 @@ class MainHomeGridViewItem extends StatelessWidget {
             const SizedBox(height: 12),
             const GridViewItemRateAndDistanceSection(),
             const SizedBox(height: 12),
-            // Text("EGP ${productData.productPrice}", style: Styles.bold16),
+            Text("EGP ${productData.productPrice}", style: Styles.bold16),
           ],
         ),
       ),

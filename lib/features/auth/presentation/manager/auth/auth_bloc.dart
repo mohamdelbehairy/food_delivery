@@ -277,7 +277,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return [
       TextFieldModel(
           header: "Email Address",
-          hintText: "Enter Email",
+          hintText: "example@gmail.com",
           controller: _loginEmailController,
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
@@ -291,7 +291,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }),
       TextFieldModel(
           header: "Password",
-          hintText: "Password",
+          hintText: "Type something longer here...",
           obscureText: !_isVisibleLogin,
           controller: _loginPasswordController,
           suffixIcon: IconButton(
@@ -322,7 +322,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return [
       TextFieldModel(
           header: "Email Address",
-          hintText: "Enter Email",
+          hintText: "example@gmail.com",
           controller: _registerEmailController,
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
@@ -336,7 +336,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }),
       TextFieldModel(
           header: "User Name",
-          hintText: "Enter User Name",
+          hintText: "Type something longer here...",
           controller: _registerUserNameController,
           validator: (value) {
             if (_registerEmailController.text.isEmpty ||
@@ -350,7 +350,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }),
       TextFieldModel(
           header: "Password",
-          hintText: "Password",
+          hintText: "Type something longer here...",
           obscureText: !_isVisibleRegister,
           controller: _registerPasswordController,
           suffixIcon: IconButton(

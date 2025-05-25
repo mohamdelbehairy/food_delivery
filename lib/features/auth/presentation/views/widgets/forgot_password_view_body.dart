@@ -4,6 +4,7 @@ import 'package:food_delivery/core/model/button_model.dart';
 import 'package:food_delivery/core/utils/helper.dart';
 import 'package:food_delivery/core/widgets/custom_button.dart';
 
+import '../../../../../core/utils/colors.dart';
 import '../../manager/auth/auth_bloc.dart';
 import '../../manager/auth/auth_event.dart';
 import '../../manager/auth/auth_state.dart';
@@ -37,6 +38,7 @@ class ForgotPasswordViewBody extends StatelessWidget {
                     buttonModel: ButtonModel(
                         isLoading: auth.isLoading,
                         buttonName: "Continue",
+                        backgroundColor: AppColors.primaryColor,
                         onTap: () => auth.add(ForgotPasswordEvent()))),
                 const SizedBox(height: 8),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/custom_profile_app_bar.dart';
+import '../../../../core/model/app_bar_model.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
 import '../../data/model/help_center_model.dart';
 import 'widgets/display_help_view_body.dart';
 
@@ -13,7 +14,7 @@ class DisplayHelpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: customProfileAppBar(context, title: title),
+        appBar: customAppBar(AppBarModel(title: title, context: context)),
         body: DisplayHelpViewBody(list: list));
   }
 }

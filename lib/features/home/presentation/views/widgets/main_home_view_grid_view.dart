@@ -34,6 +34,7 @@ class MainHomeViewGridView extends StatelessWidget {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16),
                 itemBuilder: (context, index) => MainHomeGridViewItem(
+                  
                     productData: isAllProducts
                         ? products.allProductsList[index]
                         : products.productsList[index])),

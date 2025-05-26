@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery/core/model/product_data_model.dart';
+import 'package:food_delivery/features/product/data/model/product_data_model.dart';
 import 'package:food_delivery/core/utils/assets.dart';
 import 'package:food_delivery/core/utils/constants.dart';
 import 'package:food_delivery/core/utils/helper.dart';

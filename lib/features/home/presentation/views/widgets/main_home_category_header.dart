@@ -3,7 +3,7 @@ import 'package:food_delivery/core/utils/colors.dart';
 import 'package:food_delivery/core/utils/navigation.dart';
 
 import '../../../../../core/utils/styles.dart';
-import '../all_products_view.dart';
+import '../../../../product/presentation/views/all_products_view.dart';
 
 class MainHomeCategoryHeader extends StatelessWidget {
   const MainHomeCategoryHeader({super.key});

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/core/utils/navigation.dart';
 
-import '../../../../../core/model/product_data_model.dart';
+import '../../../../product/data/model/product_data_model.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../product/presentation/views/product_view.dart';
 import 'grid_view_item_rate_and_distance_section.dart';
 import 'main_home_grid_view_item_image.dart';
 
@@ -12,9 +14,9 @@ class MainHomeGridViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () =>
+          Navigation.push(context, ProductView(productData: productData)),
       child: Container(
-        // height: 204,
         width: 153,
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -38,4 +40,3 @@ class MainHomeGridViewItem extends StatelessWidget {
     );
   }
 }
-

@@ -40,6 +40,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_facebook_auth: ^7.1.1
+  flutter_image_slideshow: ^0.1.6
   flutter_svg: ^2.1.0
   get_it: ^8.0.3
   google_sign_in: ^6.3.0
@@ -92,6 +93,8 @@ flutter:
           weight: 600
         - asset: assets/fonts/PlusJakartaSans-Bold.ttf
           weight: 700
+        - asset: assets/fonts/PlusJakartaSans-ExtraBold.ttf
+          weight: 800  
 
     - family: Urbanist
       fonts:

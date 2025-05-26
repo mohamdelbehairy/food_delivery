@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/core/model/app_bar_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/model/app_bar_model.dart';
 import '../../data/model/product_data_model.dart';
+import '../manager/product/product_bloc.dart';
 import 'widgets/product_view_body.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 
@@ -11,13 +13,17 @@ class ProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: customAppBar(AppBarModel(
-          title: "About This Menu",
-          context: context,
-          backgroundColor: Colors.white)),
-      body: const ProductViewBody(),
+    return BlocProvider(
+      create: (context) => ProductBloc(),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: customAppBar(AppBarModel(
+            context: context,
+            isProduct: true,
+            title: "About This Menu",
+            backgroundColor: Colors.white)),
+        body: ProductViewBody(productData: productData),
+      ),
     );
   }
 }

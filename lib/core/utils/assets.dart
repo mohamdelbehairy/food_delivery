@@ -130,6 +130,14 @@ class Assets {
   /// assets/images/settings.svg
   static const String imagesSettings = "assets/images/settings.svg";
 
+  /// Assets for imagesShare
+  /// assets/images/share.svg
+  static const String imagesShare = "assets/images/share.svg";
+
+  /// Assets for imagesSubtract
+  /// assets/images/subtract.svg
+  static const String imagesSubtract = "assets/images/subtract.svg";
+
   /// Assets for imagesTaco
   /// assets/images/taco.png
   static const String imagesTaco = "assets/images/taco.png";

@@ -78,12 +78,31 @@ abstract class Styles {
       color: Colors.white,
       fontWeight: FontWeight.w600);
 
+  static const semiBold24 = TextStyle(
+      fontSize: 24,
+      fontFamily: "PlusJakartaSans",
+      color: Color(0xff101010),
+      fontWeight: FontWeight.w600);
+
   // bold
   static const bold16 = TextStyle(
       fontSize: 16,
       fontFamily: "PlusJakartaSans",
       color: AppColors.primaryColor,
       fontWeight: FontWeight.w700);
+
+  static const bold18 = TextStyle(
+      fontSize: 18,
+      fontFamily: "PlusJakartaSans",
+      color: AppColors.primaryColor,
+      fontWeight: FontWeight.w700);
+
+  // extra bold
+  static const extraBold15 = TextStyle(
+      fontSize: 15,
+      fontFamily: "PlusJakartaSans",
+      color: AppColors.primaryColor,
+      fontWeight: FontWeight.w800);
 
   // urbainst font
   static TextStyle styleBoldUrbainst24 = TextStyle(
